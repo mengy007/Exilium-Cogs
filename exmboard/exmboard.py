@@ -6,11 +6,11 @@ import aiohttp
 import io
 from .utils import checks
 
-path = 'data/exilium/leaderboard'
+path = 'data/exilium/exmboard'
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
-class ExmLeaderboard:
+class ExmBoard:
 
     __author__ = "mengy007 (mengy#1441)"
     __version__ = "1.0"
@@ -33,7 +33,7 @@ class ExmLeaderboard:
                 'players': []
             }
 
-    @commands.group(name='bfvleaderboardset', pass_context=True, no_pm=True)
+    @commands.group(name='exmboardset', pass_context=True, no_pm=True)
     @checks.admin_or_permissions(manage_messages=True)
     async def _group(self, ctx):
         """
@@ -115,8 +115,8 @@ class ExmLeaderboard:
         self.init_server(server, True)
         await self.bot.say('Settings reset')
 
-    @commands.command(pass_context=True, no_pm=True, name="bfvleaderboard")
-    async def bfvleaderboard(self, ctx):
+    @commands.command(pass_context=True, no_pm=True, name="exmboard")
+    async def exmboard(self, ctx):
         """Leaderboard Stats"""
 
         server = ctx.message.server
@@ -156,4 +156,4 @@ class ExmLeaderboard:
 
 def setup(bot):
     pathlib.Path(path).mkdir(exist_ok=True, parents=True)
-    bot.add_cog(ExmLeaderboard(bot))
+    bot.add_cog(ExmBoard(bot))
