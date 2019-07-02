@@ -85,7 +85,7 @@ class ExmLeaderboard:
         await self.bot.say('Settings reset')
 
     @commands.command(pass_context=True, no_pm=True, name="bfvleaderboard")
-    async def bfvleaderboard(self, ctx, platform, *, playername):
+    async def bfvleaderboard(self, ctx):
         """Leaderboard Stats"""
 
         server = ctx.message.server
