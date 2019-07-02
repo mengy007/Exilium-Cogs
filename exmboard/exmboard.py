@@ -131,7 +131,7 @@ class ExmBoard:
         try:
             await self.bot.say('LEADERBOARD TEST')
             for player in self.settings[server.id]['players']:
-                await self.fetch_stats(self, ctx, player)
+                await fetch_stats(self, ctx, player)
                 #await self.bot.say(player)
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
