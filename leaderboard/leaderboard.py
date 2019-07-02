@@ -32,7 +32,7 @@ class Leaderboard:
                 'whitelist': []
             }
 
-    @commands.group(name='leaderboardset', pass_context=True, no_pm=True)
+    @commands.group(name='bfvleaderboardset', pass_context=True, no_pm=True)
     @checks.admin_or_permissions(manage_messages=True)
     async def _group(self, ctx):
         """
@@ -84,7 +84,7 @@ class Leaderboard:
         self.init_server(server, True)
         await self.bot.say('Settings reset')
 
-    @commands.command(pass_context=True, no_pm=True, name="leaderboard")
+    @commands.command(pass_context=True, no_pm=True, name="bfvleaderboard")
     async def bfvstats(self, ctx, platform, *, playername):
         """Leaderboard Stats"""
 
