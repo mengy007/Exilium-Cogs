@@ -1,8 +1,10 @@
 import discord
 from discord.ext import commands
+
 import pathlib
 from cogs.utils.dataIO import dataIO
 import aiohttp
+
 import io
 from .utils import checks
 
@@ -153,7 +155,7 @@ class ExmBoard:
 async def fetch_stats(self, ctx, playername):
     url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin" + playername
     async with aiohttp.get(url) as response:
-        return await self.bot.say(playername + ": " +response)
+        return await self.bot.say(playername + ": " + response.text())
 
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
