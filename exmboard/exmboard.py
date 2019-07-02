@@ -29,8 +29,8 @@ class ExmBoard:
     def init_server(self, server: discord.Server, reset=False):
         if server.id not in self.settings or reset:
             self.settings[server.id] = {
-                'whitelist': []
-                'players': []
+              'whitelist': [],
+              'players': []
             }
 
     @commands.group(name='exmboardset', pass_context=True, no_pm=True)
