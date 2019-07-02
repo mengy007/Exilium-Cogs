@@ -158,7 +158,7 @@ async def fetch_stats(self, ctx, playername):
     print("URL: " + url)
 
     async with aiohttp.get(url) as response:
-        return await self.bot.say(playername + " : " + str(await response.json()))
+        return await self.bot.say(playername + " : " + response.json())
 
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
