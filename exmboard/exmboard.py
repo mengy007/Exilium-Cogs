@@ -129,7 +129,9 @@ class ExmBoard:
 
         await self.bot.send_typing(channel)
         try:
-            await self.bot.say('LEADERBOARD TEST')            
+            await self.bot.say('LEADERBOARD TEST')
+            for player in self.settings[server.id]['players']
+                await self.bot.say(player)
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
             err = e.message
