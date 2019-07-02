@@ -133,7 +133,7 @@ class ExmBoard:
 
         await self.bot.send_typing(channel)
         try:
-            await self.bot.say('LEADERBOARD TEST')
+            await self.bot.say('DEATH LEADERBOARD TEST')
             for player in self.settings[server.id]['players']:
                 await fetch_stats(self, ctx, player)
                 #await self.bot.say(player)
@@ -161,8 +161,8 @@ async def fetch_stats(self, ctx, playername):
 
     async with aiohttp.get(url) as response:
         jsonObj = await response.json()
-        print("JSON: " + json.dumps(jsonObj));
-        return await self.bot.say(playername + " : " + json.dumps(jsonObj))
+        #print("JSON: " + json.dumps(jsonObj));
+        return await self.bot.say(playername + ": " + str(json.data.stats.deaths.value))
 
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
