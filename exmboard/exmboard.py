@@ -131,7 +131,8 @@ class ExmBoard:
         try:
             await self.bot.say('LEADERBOARD TEST')
             for player in self.settings[server.id]['players']:
-                await self.bot.say(player)
+                await self.fetch_stats(self, ctx, player)
+                #await self.bot.say(player)
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
             err = e.message
@@ -148,6 +149,12 @@ class ExmBoard:
             pages = self.bot.formatter.format_help_for(ctx, ctx.command)
             for page in pages:
                 await self.bot.send_message(ctx.message.channel, page)
+
+async def fetch_stats(self, ctx, playername):
+    url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin" + playername
+    async with aiohttp.get(url) as response:
+        return await self.bot.say(playername + ": " +response)
+
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
 #    async with aiohttp.get(urlen) as response:
