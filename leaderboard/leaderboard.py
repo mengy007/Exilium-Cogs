@@ -30,6 +30,7 @@ class ExmLeaderboard:
         if server.id not in self.settings or reset:
             self.settings[server.id] = {
                 'whitelist': []
+                'players': []
             }
 
     @commands.group(name='bfvleaderboardset', pass_context=True, no_pm=True)
@@ -43,6 +44,36 @@ class ExmLeaderboard:
             #await self.bot.send_help(ctx)
             #await ctx.send_help()
             await self.send_cmd_help(ctx)
+
+    @_group.command(name='add', pass_context=True, no_pm=True)
+    async def add(self, ctx, playername):
+        """
+        add a player to be tracked on leaderboard
+        """
+
+        server = ctx.message.server
+        self.init_server(server)
+
+        if playername in self.settings[server.id]['players']:
+            return await self.bot.say('Player already on leaderboard')
+        self.settings[server.id]['players'].append(playername)
+        self.save_json()
+        await self.bot.say('Player added to leaderboard')
+
+    @_group.command(name='remove', pass_context=True, no_pm=True)
+    async def remove(self, ctx, playername):
+        """
+        remove a player from being tracked on leaderboard
+        """
+
+        server = ctx.message.server
+        self.init_server(server)
+
+        if playername in self.settings[server.id]['players']:
+            self.settings[server.id]['players'].remove(playername)
+            self.save_json()
+            return await self.bot.say('Player removed from leaderboard')
+        await self.bot.say('Player not on leaderboard')
 
     @_group.command(name='whitelist', pass_context=True, no_pm=True)
     async def whitelist(self, ctx, channel: discord.Channel):
@@ -98,28 +129,7 @@ class ExmLeaderboard:
 
         await self.bot.send_typing(channel)
         try:
-            await self.bot.say('LEADERBOARD TEST')
-            #p = {
-            #    'PSN': 2,
-            #    'PS4': 2,
-            #    'PLAYSTATION': 2,
-            #    'XBOX': 1,
-            #    'XB': 1,
-            #    'XB1': 1,
-            #    'X1': 1,
-            #    'PC': 3,
-            #    'MAC': 4,
-            #}
-            #pform = p.get(platform.upper(), 0)
-            #if pform:
-            #    if pform == 4:
-            #        await self.bot.say(ctx.message.author.mention + ", Ha ha ha ha ha... Mac.. You Sir are hilarious")
-            #    else:
-            #        url = 'https://www.baver.se/bfv/index.php?pf=' + str(pform) + '&user=' + playername.replace(" ", "%20")
-            #        await fetch_image(self, ctx, ctx.message.author, url, playername, platform)
-            #        await self.bot.say('https://battlefieldtracker.com/bfv/profile/origin/' + playername.replace(" ", "%20") + '/overview')
-            #else:
-            #    await self.bot.say(ctx.message.author.mention + ", please specify a valid platform. (PSN, XBOX or PC)")
+            await self.bot.say('LEADERBOARD TEST')            
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
             err = e.message
