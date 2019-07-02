@@ -10,7 +10,7 @@ path = 'data/exilium/leaderboard'
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
-class Leaderboard:
+class ExmLeaderboard:
 
     __author__ = "mengy007 (mengy#1441)"
     __version__ = "1.0"
@@ -146,4 +146,4 @@ class Leaderboard:
 
 def setup(bot):
     pathlib.Path(path).mkdir(exist_ok=True, parents=True)
-    bot.add_cog(Leaderboard(bot))
+    bot.add_cog(ExmLeaderboard(bot))
