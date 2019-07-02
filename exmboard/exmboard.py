@@ -162,7 +162,7 @@ async def fetch_stats(self, ctx, playername):
     async with aiohttp.get(url) as response:
         jsonObj = await response.json()
         #print("JSON: " + json.dumps(jsonObj));
-        return await self.bot.say(playername + ": " + str(json.data.stats.deaths.value))
+        return await self.bot.say(playername + ": " + str(jsonObj.data.stats.deaths.value))
 
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
