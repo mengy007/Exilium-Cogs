@@ -155,7 +155,7 @@ class ExmBoard:
 async def fetch_stats(self, ctx, playername):
     url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername
     async with aiohttp.get(url) as response:
-        return await self.bot.say(playername + " : " + str(response.status) + " : " + str(response))
+        return await self.bot.say(playername + " : " + str(await response.json()))
 
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
