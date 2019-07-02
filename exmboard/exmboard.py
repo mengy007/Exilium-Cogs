@@ -8,6 +8,8 @@ import aiohttp
 import io
 from .utils import checks
 
+import json
+
 path = 'data/exilium/exmboard'
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
@@ -158,9 +160,9 @@ async def fetch_stats(self, ctx, playername):
     print("URL: " + url)
 
     async with aiohttp.get(url) as response:
-        json = await response.json()
-        #print("JSON" + json);
-        return await self.bot.say(playername + " : " + json.status)
+        jsonObj = await response.json()
+        print("JSON: " + json.dumps(jsonObj));
+        return await self.bot.say(playername + " : " + json.dumps(jsonObj))
 
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
