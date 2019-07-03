@@ -294,7 +294,7 @@ class ExmBoard:
 
 async def update_player_data():
     print('Path: ' + os.path.dirname(os.path.realpath(__file__)))
-    subprocess.run([os.path.dirname(os.path.realpath(__file__)) + "/cron.sh"])
+    subprocess.run([os.path.dirname(os.path.realpath(__file__)) + "/../cron.sh"])
 
 async def create_placed_image(self, ctx, player, scope, stat, place, value):
     fillColor = "#b08d57" # bronze
