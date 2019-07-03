@@ -204,19 +204,23 @@ class ExmBoard:
                 # avatar images
                 if count < 4:
                     placedImage = await create_placed_image(self, ctx, player, scope, stat, count)
-                    pasteXY = (0, 0)
+                    pX = 0
+                    pY = 0
                     if count > 1:
                         placedImage.resize((400, 400))
                         if count == 2:
-                            pasteXY = ((bigW / 2) - 400 - 250, 150)
+                            pX = (bigW / 2) - 400 - 250
+                            pY =  150)
                         elif count == 3:
-                            pasteXY = ((bigW / 2) + 250, 150)
+                            pX = (bigW / 2) + 250
+                            pY = 150
                     else:
-                        pasteXY = ((bigW / 2) - 250, 100)
+                        pX = (bigW / 2) - 250
+                        pY = 100
 
                     pW, pH = placedImage.size
                     avatarCrop = placedImage.crop((0, 0, pW, pH))
-                    bgImage.paste(avatarCrop, pasteXY)
+                    bgImage.paste(avatarCrop, (pX, pY))
                 else:
                     avatar = urllib.urlopen(player['avatarUrl'])
                     avatarImageFile = io.BytesIO(avatar.read())                
