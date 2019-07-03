@@ -75,7 +75,7 @@ class ExmBoard:
                     return await self.bot.say('Player already on leaderboard')
                 self.settings[server.id]['players'].append(playername)
                 self.save_json()
-                update_player_data()
+                await update_player_data()
                 await self.bot.say('Player added to leaderboard')    
             
             else:
@@ -94,7 +94,7 @@ class ExmBoard:
         if playername in self.settings[server.id]['players']:
             self.settings[server.id]['players'].remove(playername)
             self.save_json()
-            update_player_data()
+            await update_player_data()
             return await self.bot.say('Player removed from leaderboard')
         await self.bot.say('Player not on leaderboard')
 
