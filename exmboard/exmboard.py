@@ -147,14 +147,14 @@ class ExmBoard:
             print("Sorted: ")
             print("\n".join(map(str, sortedPlayers)))
 
-            botMessage = "`[EXM] DEATH LEADERBOARD\n"
+            botMessage = "```css\n[EXM] DEATH LEADERBOARD\n"
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
                 #await self.bot.say(player['name'] + ": " + str(player['deaths']))
                 botMessage += player['name'] + ": " + str(player['deaths']) + "\n"
 
-            botMessage += "`"
+            botMessage += "```"
             await self.bot.say(botMessage);
 
         except Exception as e:
