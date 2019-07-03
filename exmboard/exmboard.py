@@ -122,7 +122,7 @@ class ExmBoard:
         await self.bot.say('Settings reset')
 
     @commands.command(pass_context=True, no_pm=True, name="exmboard")
-    async def exmboard(self, ctx):
+    async def exmboard(self, ctx, stat):
         """Leaderboard Stats"""
 
         server = ctx.message.server
@@ -133,27 +133,29 @@ class ExmBoard:
         if channel.id not in self.settings[server.id]['whitelist']:
             return
 
+        if stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed']
+
         await self.bot.send_typing(channel)
         try:
             players = []
             for player in self.settings[server.id]['players']:
-                players.append(await fetch_stats(self, ctx, player))
+                players.append(await fetch_stats(self, ctx, player, stat))
                 #await self.bot.say(player)
 
             print("Unsorted: " + json.dumps(players) + "\n");
 
-            sortedPlayers = sorted(players, key=lambda i: i['deaths'], reverse=True)
+            sortedPlayers = sorted(players, key=lambda i: i['value'], reverse=True)
 
             print("Sorted: ")
             print("\n".join(map(str, sortedPlayers)))
 
-            botMessage = "```css\n[EXM] DEATH LEADERBOARD\n"
+            botMessage = "```css\n[EXM] " + stat.upper() + " LEADERBOARD\n"
             count = 1
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
                 #await self.bot.say(player['name'] + ": " + str(player['deaths']))
-                botMessage += "[" + str(count) + "] " + player['name'] + ": " + str(player['deaths']) + "\n"
+                botMessage += "[" + str(count) + "] " + player['name'] + ": " + str(player['value']) + "\n"
                 count += 1
 
             botMessage += "```"
@@ -176,7 +178,7 @@ class ExmBoard:
             for page in pages:
                 await self.bot.send_message(ctx.message.channel, page)
 
-async def fetch_stats(self, ctx, playername):
+async def fetch_stats(self, ctx, playername, stat):
     url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername
     
     print("URL: " + url)
@@ -184,7 +186,7 @@ async def fetch_stats(self, ctx, playername):
     async with aiohttp.get(url) as response:
         jsonObj = await response.json()
         #print("JSON: " + json.dumps(jsonObj));
-        return {'name': playername, 'deaths': jsonObj['data']['stats']['deaths']['value']}
+        return {'name': playername, 'value': jsonObj['data']['stats'][stat]['value']}
         #return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
 
 
