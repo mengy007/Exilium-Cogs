@@ -60,11 +60,19 @@ class ExmBoard:
         server = ctx.message.server
         self.init_server(server)
 
-        if playername in self.settings[server.id]['players']:
-            return await self.bot.say('Player already on leaderboard')
-        self.settings[server.id]['players'].append(playername)
-        self.save_json()
-        await self.bot.say('Player added to leaderboard')
+        url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername
+        
+        async with aiohttp.get(url) as response:
+            if response.status == 200:
+                if playername in self.settings[server.id]['players']:
+                    return await self.bot.say('Player already on leaderboard')
+                self.settings[server.id]['players'].append(playername)
+                self.save_json()
+                await self.bot.say('Player added to leaderboard')    
+            
+            else:
+                return await self.bot.say('Player is not a valid origin user')
+        
 
     @_group.command(name='remove', pass_context=True, no_pm=True)
     async def remove(self, ctx, playername):
