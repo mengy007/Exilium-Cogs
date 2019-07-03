@@ -205,6 +205,7 @@ class ExmBoard:
 
             botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERS\n"
             count = 1
+            playersPerColumn = 20
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
@@ -243,9 +244,9 @@ class ExmBoard:
                     avatarCrop = avatarImage.crop((0, 0, 49, 49))
                     textX = 110
                     textY = (450 + (count * 50))
-                    if count > 11:
+                    if count > playersPerColumn + 3:
                         textX = int((bigW / 2) + 150)
-                        textY = (450 + ((count - 8) * 50))
+                        textY = (450 + ((count - playersPerColumn - 3) * 50))
                         
                     bgImage.paste(avatarCrop, (textX-55, textY+4))
                     # name and scores
