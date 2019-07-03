@@ -11,7 +11,6 @@ import collections
 from PIL import Image, ImageDraw, ImageFont
 import urllib.request as urllib
 
-
 path = 'data/exilium/exmboard'
 
 bgImage = Image.open(path + '/bg.png').convert('RGB')
@@ -162,7 +161,9 @@ class ExmBoard:
 
         await self.bot.send_typing(channel)
         try:
-            # TEST
+            #reload settings
+            self.settings = dataIO.load_json(path + '/settings.json')
+
             txt = Image.new('RGB', bgImage.size, 255)
             bigW, bigH = bgImage.size
             d = ImageDraw.Draw(bgImage)
@@ -189,9 +190,11 @@ class ExmBoard:
 
 
             players = []
-            for player in self.settings[server.id]['players']:
-                players.append(await fetch_stats(self, ctx, player, scope, stat))
-                #await self.bot.say(player)
+            for player in self.settings[server.id]['playerData']:
+                players.append(await fetch_local_stats(self, ctx, player, scope, stat))
+                
+            #for player in self.settings[server.id]['players']:
+            #    players.append(await fetch_stats(self, ctx, player, scope, stat))
 
             #print("Unsorted: " + json.dumps(players) + "\n");
 
@@ -310,6 +313,24 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     d.text((int(250 - (w / 2)), 400), value, font=fnt, fill="rgb(255,255,255)")
 
     return playerImage
+
+async def fetch_local_stats(self, ctx, player, scope, stat):
+    if scope == 'all':
+        return {'name': player['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['stats'][stat]['value']}
+    elif scope == 'firestorm':
+        return {'name': player['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['statsFirestorm'][stat]['value']}
+    else:
+        classIndex = {
+            'assault': 0,
+            'medic': 1,
+            'pilot': 2,
+            'recon': 3,
+            'support': 4,
+            'tanker': 5
+        }
+        
+        return {'name': player['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
+ 
 
 async def fetch_stats(self, ctx, playername, scope, stat):
     url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
