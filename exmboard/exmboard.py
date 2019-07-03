@@ -205,7 +205,7 @@ class ExmBoard:
 
             botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERS\n"
             count = 1
-            playersPerColumn = 20
+            playersPerColumn = 25
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
