@@ -201,11 +201,16 @@ class ExmBoard:
                     value = '{:,}'.format(player['value'])
 
                 botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
+                # avatar images
                 avatar = urllib.urlopen(player['avatarUrl'])
                 avatarImageFile = io.BytesIO(avatar.read())                
                 avatarImage = Image.open(avatarImageFile).convert('RGB').resize((49, 49), Image.ANTIALIAS)
                 avatarCrop = avatarImage.crop((0, 0, 49, 49))
                 bgImage.paste(avatarCrop, (50, 100+(count*50)))
+                
+                # name and scores
+                d.text((60, 100+(count*50)), "[" + str(count) + "] " + player['name'] + ": " + value, font=fnt, fill=0)
+
                 count += 1
 
                 if limit > 0 and count > limit:
