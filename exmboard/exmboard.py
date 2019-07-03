@@ -204,8 +204,7 @@ class ExmBoard:
                 avatar = urllib.urlopen(player['avatarUrl'])
                 avatarImageFile = io.BytesIO(avatar.read())                
                 avatarImage = Image.open(avatarImageFile).convert('RGB').thumbnail((49, 49), Image.ANTIALIAS)
-                aW, aH = avatarImage.size
-                avatarCrop = avatarImage.crop((0, 0, aW, aH))
+                avatarCrop = avatarImage.crop((0, 0, 49, 49))
                 bgImage.paste(avatarCrop, (50, 100+(count*50)))
                 count += 1
 
