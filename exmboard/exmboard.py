@@ -202,14 +202,19 @@ class ExmBoard:
 
                 botMessage += str(count) + ". " + player['name'] + ": " + value + "\n"
                 # avatar images
-                avatar = urllib.urlopen(player['avatarUrl'])
-                avatarImageFile = io.BytesIO(avatar.read())                
-                avatarImage = Image.open(avatarImageFile).convert('RGB').resize((49, 49), Image.ANTIALIAS)
-                avatarCrop = avatarImage.crop((0, 0, 49, 49))
-                bgImage.paste(avatarCrop, (50, 100+(count*50)))
-                
-                # name and scores
-                d.text((110, 100+(count*50)), str(count) + ". " + player['name'] + ": " + value, font=fnt, fill="rgb(255,255,255)")
+                if count < 4:
+                    placedImage = await create_placed_image(self, ctx, player, scope, stat, count)
+                    pW, pH = placedImage.size
+                    avatarCrop = placedImage.crop((0, 0, pW, pH))
+                    bgImage.paste(avatarCrop, (count * 500, 100))
+                else:
+                    avatar = urllib.urlopen(player['avatarUrl'])
+                    avatarImageFile = io.BytesIO(avatar.read())                
+                    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((49, 49), Image.ANTIALIAS)
+                    avatarCrop = avatarImage.crop((0, 0, 49, 49))
+                    bgImage.paste(avatarCrop, (50, 100 + (count * 50)))
+                    # name and scores
+                    d.text((110, 100+(count*50)), str(count) + ". " + player['name'] + ": " + value, font=fnt, fill="rgb(255,255,255)")
 
                 count += 1
 
@@ -240,6 +245,16 @@ class ExmBoard:
             pages = self.bot.formatter.format_help_for(ctx, ctx.command)
             for page in pages:
                 await self.bot.send_message(ctx.message.channel, page)
+
+async def create_placed_image(self, ctx, player, scope, stat, place):
+    fillColor = "gray"
+    if place == 2:
+        fillColor = "brown"
+    elif place == 1:
+        fillColor = "gold"
+
+    playerImage = Image.new('RGB', (500, 500), fillColor)
+    return playerImage
 
 async def fetch_stats(self, ctx, playername, scope, stat):
     url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
