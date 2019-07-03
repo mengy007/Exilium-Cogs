@@ -14,7 +14,7 @@ import urllib.request as urllib
 
 path = 'data/exilium/exmboard'
 
-bgImage = Image.open(path + '/bg.jpg')
+bgImage = Image.open(path + '/bg.jpg').convert('RGB')
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
