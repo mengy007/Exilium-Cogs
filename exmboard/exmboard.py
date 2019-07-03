@@ -131,7 +131,7 @@ class ExmBoard:
         await self.bot.say('Settings reset')
 
     @commands.command(pass_context=True, no_pm=True, name="exmboard")
-    async def exmboard(self, ctx, scope, stat, limit = "all"):
+    async def exmboard(self, ctx, scope, stat, limit = 0):
         """Leaderboard Stats"""
 
         server = ctx.message.server
@@ -183,7 +183,7 @@ class ExmBoard:
                 botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
                 count += 1
 
-                if str(limit) != 'all' and count > limit:
+                if limit > 0 and count > limit:
                     break
 
             botMessage += "```"
