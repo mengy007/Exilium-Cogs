@@ -249,8 +249,8 @@ class ExmBoard:
                 else:
                     avatar = urllib.urlopen(player['avatarUrl'])
                     avatarImageFile = io.BytesIO(avatar.read())                
-                    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((49, 49), Image.ANTIALIAS)
-                    avatarCrop = avatarImage.crop((0, 0, 49, 49))
+                    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((50, 50), Image.ANTIALIAS)
+                    avatarCrop = avatarImage.crop((0, 0, 50, 50))
                     textX = 110
                     textY = (450 + (count * 50))
                     if count > playersPerColumn + 3:
