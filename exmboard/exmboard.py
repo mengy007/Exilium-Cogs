@@ -246,7 +246,7 @@ class ExmBoard:
                     textY = (450 + (count * 50))
                     if count > playersPerColumn + 3:
                         textX = int((bigW / 2) + 150)
-                        textY = (450 + ((count - playersPerColumn - 3) * 50))
+                        textY = (450 + ((count - playersPerColumn) * 50))
                         
                     bgImage.paste(avatarCrop, (textX-55, textY+4))
                     # name and scores
@@ -255,7 +255,7 @@ class ExmBoard:
                     valueX = int((bigW / 2) - w - 50)
                     if count > playersPerColumn + 3:
                         valueX = int(bigW - w - 50)
-                        
+
                     d.text((valueX, textY), value, font=fnt, fill="rgb(255,255,255)")
 
                 count += 1
