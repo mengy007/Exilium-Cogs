@@ -206,7 +206,7 @@ class ExmBoard:
                 avatarImage = Image.open(avatarImageFile).convert('RGB')
                 aW, aH = avatarImage.size
                 avatarCrop = avatarImage.crop((0, 0, aW, aH))
-                bgImage.paste(avatarCrop, (50, 100+(count*50), 49, 49))
+                bgImage.paste(avatarCrop, (50, 100+(count*50), 100, 100+(count*50)+50))
                 count += 1
 
                 if limit > 0 and count > limit:
