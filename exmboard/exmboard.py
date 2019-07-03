@@ -149,7 +149,7 @@ class ExmBoard:
 
             await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
-                await self.bot.say(player['name'] + ": " + player['deaths'])
+                await self.bot.say(player['name'] + ": " + str(player['deaths']))
 
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
