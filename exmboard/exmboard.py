@@ -164,7 +164,7 @@ class ExmBoard:
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', size=50)
             d = ImageDraw.Draw(txt)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
-            d.text((10, 10), scope.upper() + ' ' + stat.upper() + ' LEADERBOARD', font=headerFont, fill=0)
+            d.text((10, 10), scope.lower() + ' ' + stat.lower() + ' leaderboard', font=headerFont, fill=0)
             bgImage.putalpha(txt)
             #out = Image.alpha_composite(bgImage, txt)
             with io.BytesIO() as out:
