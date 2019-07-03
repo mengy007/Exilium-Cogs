@@ -166,7 +166,7 @@ class ExmBoard:
             bigW, bigH = bgImage.size
             d = ImageDraw.Draw(bgImage)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
-            headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
+            headerText = scope.lower() + ' ' + stat.lower() + ' leaders'
             w, h = d.textsize(headerText, font=headerFont)
             d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill="rgb(255,255,255)")
 
@@ -188,7 +188,7 @@ class ExmBoard:
             #print("Sorted: ")
             #print("\n".join(map(str, sortedPlayers)))
 
-            botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERBOARD\n"
+            botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERS\n"
             count = 1
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
