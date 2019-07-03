@@ -63,7 +63,8 @@ class ExmBoard:
         url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername
         
         async with aiohttp.get(url) as response:
-            if response.status == 200:
+            jsonObj = await response.json()
+            if response.status == 200 and jsonObj['status'] == 'Success':
                 if playername in self.settings[server.id]['players']:
                     return await self.bot.say('Player already on leaderboard')
                 self.settings[server.id]['players'].append(playername)
