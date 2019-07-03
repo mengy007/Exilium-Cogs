@@ -279,7 +279,7 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     elif place == 3:
         placeString = str(place) + "rd."
     playerNameString = player['name']
-    w, h = d.textsize(placeString, fnt=headerFont)
+    w, h = d.textsize(placeString, font=headerFont)
     d.text((int(250 - (w / 2)), 10), placeString, font=headerFont, fill="rgb(255,255,255)")
     w, h = d.textsize(playerNameString, font=fnt)
     d.text((int(250 - (w / 2)), 300), playerNameString, font=fnt, fill="rgb(255,255,255)")
