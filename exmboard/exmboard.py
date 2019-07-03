@@ -288,8 +288,8 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     d.text((int(250 - (w / 2)), 10), placeString, font=headerFont, fill="rgb(255,255,255)")
     w, h = d.textsize(playerNameString, font=fnt)
     d.text((int(250 - (w / 2)), 320), playerNameString, font=fnt, fill="rgb(255,255,255)")
-    w, h=d.textsize(value, font=headerFont)
-    d.text((int(250 - (w / 2)), 375), value, font=headerFont, fill="rgb(255,255,255)")
+    w, h=d.textsize(value, font=fnt)
+    d.text((int(250 - (w / 2)), 400), value, font=fnt, fill="rgb(255,255,255)")
 
     return playerImage
 
