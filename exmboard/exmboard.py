@@ -205,7 +205,7 @@ async def fetch_stats(self, ctx, playername, scope, stat):
               'tanker': 5
             }
             
-            return {'name': playername, 'value': jsonObj['data']['classes'][classIndex][stat]['value']}
+            return {'name': playername, 'value': jsonObj['data']['classes'][classIndex[scope]][stat]['value']}
         #return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
 
 
