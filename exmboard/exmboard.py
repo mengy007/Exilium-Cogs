@@ -163,9 +163,9 @@ class ExmBoard:
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 100)
             d = ImageDraw.Draw(txt)
             d.text((10, 10), 'TEST', font=fnt, fill=(255,255,255,128))
-            out = Image.alpha_composite(self.bgImage, txt)
+            out = Image.alpha_composite(bgImage, txt)
             self.bot.send_file(ctx.message.channel, io.BytesIO(out.tobytes()), filename='exmboard.png')
-            
+
 
             players = []
             for player in self.settings[server.id]['players']:
