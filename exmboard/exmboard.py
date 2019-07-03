@@ -9,6 +9,7 @@ import json
 import operator
 import collections
 from PIL import Image, ImageDraw, ImageFont
+import urllib2 as urllib
 
 
 path = 'data/exilium/exmboard'
@@ -168,11 +169,11 @@ class ExmBoard:
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
             w, h = d.textsize(headerText, font=headerFont)
             d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill=0)
-            bgImage.putalpha(txt)
-            #out = Image.alpha_composite(bgImage, txt)
-            with io.BytesIO() as out:
-                bgImage.save(out, 'PNG')
-                await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
+
+            #bgImage.putalpha(txt)            
+            #with io.BytesIO() as out:
+            #    bgImage.save(out, 'PNG')
+            #    await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
 
 
             players = []
@@ -200,6 +201,12 @@ class ExmBoard:
                     value = '{:,}'.format(player['value'])
 
                 botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
+                avatar = urllib.urlopen(player['avatarUrl'])
+                avatarImageFile = io.BytesIO(avatar.read())                
+                avatarImage = Image.open(avatarImageFile)
+                aW, aH = avatarImage.size
+                avatarCrop = avatarImage.crop(0, 0, aW, aH)
+                bgImage.paste(avatarCrop, 50, 100+(count*50), aW, aH)
                 count += 1
 
                 if limit > 0 and count > limit:
@@ -207,6 +214,11 @@ class ExmBoard:
 
             botMessage += "```"
             await self.bot.say(botMessage)
+
+            bgImage.putalpha(txt)            
+            with io.BytesIO() as out:
+                bgImage.save(out, 'PNG')
+                await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
 
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
@@ -234,9 +246,9 @@ async def fetch_stats(self, ctx, playername, scope, stat):
         jsonObj = await response.json()
         #print("JSON: " + json.dumps(jsonObj));
         if scope == 'all':
-            return {'name': playername, 'value': jsonObj['data']['stats'][stat]['value']}
+            return {'name': playername, 'avatarUrl': jsonObj['avatarUrl'], 'value': jsonObj['data']['stats'][stat]['value']}
         elif scope == 'firestorm':
-            return {'name': playername, 'value': jsonObj['data']['statsFirestorm'][stat]['value']}
+            return {'name': playername, 'avatarUrl': jsonObj['avatarUrl'], 'value': jsonObj['data']['statsFirestorm'][stat]['value']}
         else:
             classIndex = {
               'assault': 0,
@@ -247,7 +259,7 @@ async def fetch_stats(self, ctx, playername, scope, stat):
               'tanker': 5
             }
             
-            return {'name': playername, 'value': jsonObj['data']['classes'][classIndex[scope]][stat]['value']}
+            return {'name': playername, 'avatarUrl': jsonObj['avatarUrl'], 'value': jsonObj['data']['classes'][classIndex[scope]][stat]['value']}
         #return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
 
 
