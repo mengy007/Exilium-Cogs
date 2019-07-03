@@ -226,12 +226,13 @@ class ExmBoard:
                     avatarImageFile = io.BytesIO(avatar.read())                
                     avatarImage = Image.open(avatarImageFile).convert('RGB').resize((49, 49), Image.ANTIALIAS)
                     avatarCrop = avatarImage.crop((0, 0, 49, 49))
+                    textX = 110
                     textY = (450 + (count * 50))
-                    bgImage.paste(avatarCrop, (50, textY))
+                    bgImage.paste(avatarCrop, (50, textY+2))
                     # name and scores
-                    d.text((110, textY), str(count) + ". " + player['name'], font=fnt, fill="rgb(255,255,255)")
+                    d.text((textX, textY), str(count) + ". " + player['name'], font=fnt, fill="rgb(255,255,255)")
                     w, h = d.textsize(value, font=fnt)
-                    d.text(((bigW / 2) - w - 5, textY), value, font=fnt, fill="rgb(255,255,255)")
+                    d.text(((bigW / 2) - w - 50, textY), value, font=fnt, fill="rgb(255,255,255)")
 
                 count += 1
 
