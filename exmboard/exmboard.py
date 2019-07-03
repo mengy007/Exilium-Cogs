@@ -162,7 +162,7 @@ class ExmBoard:
             txt = Image.new('L', bgImage.size, 50)
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 100)
             d = ImageDraw.Draw(txt)
-            d.text((10, 10), 'TEST', font=fnt, fill=(255,255,255,128))
+            d.text((10, 10), 'TEST', font=fnt, fill=50)
             bgImage.putalpha(txt)
             #out = Image.alpha_composite(bgImage, txt)
             self.bot.send_file(ctx.message.channel, io.BytesIO(bgImage.tobytes()), filename='exmboard.png')
