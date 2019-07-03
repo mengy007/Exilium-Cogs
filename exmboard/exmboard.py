@@ -160,10 +160,10 @@ class ExmBoard:
         try:
             # TEST
             txt = Image.new('L', bgImage.size, 255)
-            fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 100)
+            fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 75)
             d = ImageDraw.Draw(txt)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
-            d.text((10, 10), '[EXM] ' + scope.upper() + ' ' + stat.upper() + ' LEADERBOARD', font=fnt, fill=256)
+            d.text((10, 10), '[EXM] ' + scope.upper() + ' ' + stat.upper() + ' LEADERBOARD', font=fnt, fill=255)
             bgImage.putalpha(txt)
             #out = Image.alpha_composite(bgImage, txt)
             with io.BytesIO() as out:
