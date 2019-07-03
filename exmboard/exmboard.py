@@ -8,7 +8,8 @@ from .utils import checks
 import json
 import operator
 import collections
-import Image, ImageDraw, ImageFont
+import PIL
+from PIL import Image, ImageDraw, ImageFont
 
 
 path = 'data/exilium/exmboard'
