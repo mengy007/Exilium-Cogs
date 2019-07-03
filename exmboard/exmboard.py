@@ -10,6 +10,7 @@ import operator
 import collections
 from PIL import Image, ImageDraw, ImageFont
 import urllib.request as urllib
+import subprocess
 
 path = 'data/exilium/exmboard'
 
@@ -73,6 +74,7 @@ class ExmBoard:
                     return await self.bot.say('Player already on leaderboard')
                 self.settings[server.id]['players'].append(playername)
                 self.save_json()
+                update_player_data()
                 await self.bot.say('Player added to leaderboard')    
             
             else:
@@ -91,6 +93,7 @@ class ExmBoard:
         if playername in self.settings[server.id]['players']:
             self.settings[server.id]['players'].remove(playername)
             self.save_json()
+            update_player_data()
             return await self.bot.say('Player removed from leaderboard')
         await self.bot.say('Player not on leaderboard')
 
@@ -287,6 +290,9 @@ class ExmBoard:
             pages = self.bot.formatter.format_help_for(ctx, ctx.command)
             for page in pages:
                 await self.bot.send_message(ctx.message.channel, page)
+
+async def update_player_data():
+    subprocess.run(["python3", "cron.py"])
 
 async def create_placed_image(self, ctx, player, scope, stat, place, value):
     fillColor = "#b08d57" # bronze
