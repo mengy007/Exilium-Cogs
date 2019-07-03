@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 path = 'data/exilium/exmboard'
 
-bgImage = Image.open(path + '/bg.png').convert('RGBA')
+bgImage = Image.open(path + '/bg.png')
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
