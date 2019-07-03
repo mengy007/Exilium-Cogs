@@ -140,11 +140,11 @@ class ExmBoard:
                 players.append(await fetch_stats(self, ctx, player))
                 #await self.bot.say(player)
 
-            print(json.dumps(players));
+            print("Unsorted: " + json.dumps(players));
 
             sortedPlayers = collections.OrderedDict(sorted(players, key=lambda i: i['deaths']))
 
-            print(json.dumps(sortedPlayers));
+            print("Sorted: " + json.dumps(sortedPlayers));
 
             await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
