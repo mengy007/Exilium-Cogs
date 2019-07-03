@@ -166,7 +166,7 @@ class ExmBoard:
             bgImage.putalpha(txt)
             #out = Image.alpha_composite(bgImage, txt)
             with io.BytesIO() as out:
-                await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.png')
+                await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getbytes()), filename='exmboard.png')
 
 
             players = []
