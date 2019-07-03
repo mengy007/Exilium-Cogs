@@ -169,7 +169,7 @@ async def fetch_stats(self, ctx, playername):
     async with aiohttp.get(url) as response:
         jsonObj = await response.json()
         #print("JSON: " + json.dumps(jsonObj));
-        return await {'name': playername, 'deaths': jsonObj['data']['stats']['deaths']['value']}
+        return {'name': playername, 'deaths': jsonObj['data']['stats']['deaths']['value']}
         #return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
 
 
