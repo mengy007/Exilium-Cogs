@@ -162,8 +162,8 @@ class ExmBoard:
             # TEST
             txt = Image.new('RGB', bgImage.size, 255)
             bigW, bigH = bgImage.size
-            headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=50)
-            fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', size=50)
+            headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=60)
+            fnt = ImageFont.truetype(path + '/futura.ttf', size=50)
             d = ImageDraw.Draw(bgImage)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
