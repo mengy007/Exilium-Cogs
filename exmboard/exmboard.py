@@ -209,7 +209,7 @@ class ExmBoard:
                 bgImage.paste(avatarCrop, (50, 100+(count*50)))
                 
                 # name and scores
-                d.text((110, 100+(count*50)), "[" + str(count) + "] " + player['name'] + ": " + value, font=fnt, fill="rgb(255,255,255)")
+                d.text((110, 100+(count*50)), str(count) + ". " + player['name'] + ": " + value, font=fnt, fill="rgb(255,255,255)")
 
                 count += 1
 
