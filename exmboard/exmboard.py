@@ -60,7 +60,7 @@ class ExmBoard:
         server = ctx.message.server
         self.init_server(server)
 
-        url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername
+        url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
         
         async with aiohttp.get(url) as response:
             jsonObj = await response.json()
@@ -131,7 +131,7 @@ class ExmBoard:
         await self.bot.say('Settings reset')
 
     @commands.command(pass_context=True, no_pm=True, name="exmboard")
-    async def exmboard(self, ctx, scope, stat):
+    async def exmboard(self, ctx, scope, stat, limit):
         """Leaderboard Stats"""
 
         server = ctx.message.server
@@ -183,6 +183,9 @@ class ExmBoard:
                 botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
                 count += 1
 
+                if limit not 'all' and count > limit:
+                    break
+
             botMessage += "```"
             await self.bot.say(botMessage);
 
@@ -204,7 +207,7 @@ class ExmBoard:
                 await self.bot.send_message(ctx.message.channel, page)
 
 async def fetch_stats(self, ctx, playername, scope, stat):
-    url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername
+    url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
     
     print("URL: " + url)
 
