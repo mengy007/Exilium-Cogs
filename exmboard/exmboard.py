@@ -159,7 +159,7 @@ class ExmBoard:
             #print("Sorted: ")
             #print("\n".join(map(str, sortedPlayers)))
 
-            botMessage = "```css\n[EXM] " + stat.upper() + " LEADERBOARD\n"
+            botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERBOARD\n"
             count = 1
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
