@@ -205,8 +205,8 @@ class ExmBoard:
                 avatarImageFile = io.BytesIO(avatar.read())                
                 avatarImage = Image.open(avatarImageFile)
                 aW, aH = avatarImage.size
-                avatarCrop = avatarImage.crop(0, 0, aW, aH)
-                bgImage.paste(avatarCrop, 50, 100+(count*50), aW, aH)
+                avatarCrop = avatarImage.crop((0, 0, aW, aH))
+                bgImage.paste(avatarCrop, (50, 100+(count*50), aW, aH))
                 count += 1
 
                 if limit > 0 and count > limit:
