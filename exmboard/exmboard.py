@@ -207,7 +207,7 @@ class ExmBoard:
                     pX = 0
                     pY = 0
                     if count > 1:
-                        placedImage.resize((400, 400))
+                        placedImage = placedImage.resize((400, 400), Image.ANTIALIAS)
                         if count == 2:
                             pX = int((bigW / 2) - 400 - 250)
                             pY =  150
