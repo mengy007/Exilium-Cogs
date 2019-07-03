@@ -203,7 +203,7 @@ class ExmBoard:
                 botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
                 avatar = urllib.urlopen(player['avatarUrl'])
                 avatarImageFile = io.BytesIO(avatar.read())                
-                avatarImage = Image.open(avatarImageFile)
+                avatarImage = Image.open(avatarImageFile).convert('RGB')
                 aW, aH = avatarImage.size
                 avatarCrop = avatarImage.crop((0, 0, aW, aH))
                 bgImage.paste(avatarCrop, (50, 100+(count*50), aW, aH))
