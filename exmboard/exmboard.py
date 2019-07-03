@@ -133,10 +133,17 @@ class ExmBoard:
 
         await self.bot.send_typing(channel)
         try:
-            await self.bot.say('DEATH LEADERBOARD TEST')
+            players = []
             for player in self.settings[server.id]['players']:
-                await fetch_stats(self, ctx, player)
+                players.append(await fetch_stats(self, ctx, player))
                 #await self.bot.say(player)
+
+            # SORTING
+
+            await self.bot.say('DEATH LEADERBOARD TEST')
+            for player in players:
+                await self.bot.say(player.name + ": " + player.deaths)
+
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
             err = e.message
@@ -162,7 +169,8 @@ async def fetch_stats(self, ctx, playername):
     async with aiohttp.get(url) as response:
         jsonObj = await response.json()
         #print("JSON: " + json.dumps(jsonObj));
-        return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
+        return await {'name': playername, 'deaths': jsonObj['data']['stats']['deaths']['value']}
+        #return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
 
 
 #async def fetch_image(self, ctx, duser, urlen, user, platform):
