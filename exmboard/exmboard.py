@@ -166,7 +166,7 @@ class ExmBoard:
             for player in sortedPlayers:
                 #await self.bot.say(player['name'] + ": " + str(player['deaths']))
                 value = ''
-                if player['value'] < 0:
+                if isinstance(player['value'], float):
                     value = '{0:.3g}'.format(player['value'])
                 else:
                     value = '{:,}'.format(player['value'])
