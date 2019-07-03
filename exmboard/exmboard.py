@@ -14,7 +14,7 @@ import urllib.request as urllib
 
 path = 'data/exilium/exmboard'
 
-bgImage = Image.open(path + '/bg.jpg').convert('RGB')
+bgImage = Image.open(path + '/bg.png').convert('RGB')
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
@@ -222,7 +222,7 @@ class ExmBoard:
             #bgImage.putalpha(txt)
             with io.BytesIO() as out:
                 bgImage.save(out, 'PNG')
-                await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
+                await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.png')
 
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
