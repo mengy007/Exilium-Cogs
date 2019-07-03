@@ -74,12 +74,13 @@ class ExmBoard:
                 if playername in self.settings[server.id]['players']:
                     return await self.bot.say('Player already on leaderboard')
                 self.settings[server.id]['players'].append(playername)
-                self.save_json()
-                await update_player_data()
-                await self.bot.say('Player added to leaderboard')    
+                self.save_json()                
+                await self.bot.say('Player added to leaderboard')
+                update_player_data()
+                return await self.bot.say('Player added to leaderboard')
             
             else:
-                return await self.bot.say('Player is not a valid origin user')
+                return await self.bot.say('Player data updating may take a few minutes')
         
 
     @_group.command(name='remove', pass_context=True, no_pm=True)
@@ -94,8 +95,10 @@ class ExmBoard:
         if playername in self.settings[server.id]['players']:
             self.settings[server.id]['players'].remove(playername)
             self.save_json()
-            await update_player_data()
-            return await self.bot.say('Player removed from leaderboard')
+            await self.bot.say('Player removed from leaderboard')
+            update_player_data()
+            return await self.bot.say('Player data updating may take a few minutes')
+
         await self.bot.say('Player not on leaderboard')
 
     @_group.command(name='whitelist', pass_context=True, no_pm=True)
