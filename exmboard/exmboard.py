@@ -9,7 +9,7 @@ import json
 import operator
 import collections
 from PIL import Image, ImageDraw, ImageFont
-import urllib2 as urllib
+import urllib.request as urllib
 
 
 path = 'data/exilium/exmboard'
