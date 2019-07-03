@@ -138,14 +138,10 @@ class ExmBoard:
             players = []
             for player in self.settings[server.id]['players']:
                 players.append(await fetch_stats(self, ctx, player))
-                #await self.bot.say(player)
-
-            # SORTING
-            sortedObj = sorted(players, key=lambda kv: kv[1])
-            sortedPlayers = collections.OrderedDict(sortedObj)
+                #await self.bot.say(player)            
 
             await self.bot.say('DEATH LEADERBOARD TEST')
-            for player in sortedPlayers:
+            for key, player in sorted(players, key=lambda item: item[1]['deaths']):
                 await self.bot.say(player['name'] + ": " + player['deaths'])
 
         except Exception as e:
