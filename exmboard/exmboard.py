@@ -141,7 +141,7 @@ class ExmBoard:
                 #await self.bot.say(player)
 
             # SORTING
-            sortedObj = sorted(players.items(), key=lambda kv: kv[1])
+            sortedObj = sorted(players, key=lambda kv: kv[1])
             sortedPlayers = collections.OrderedDict(sortedObj)
 
             await self.bot.say('DEATH LEADERBOARD TEST')
