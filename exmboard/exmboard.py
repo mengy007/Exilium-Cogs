@@ -133,7 +133,7 @@ class ExmBoard:
         if channel.id not in self.settings[server.id]['whitelist']:
             return
 
-        if stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed']
+        if stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed']:
 
         await self.bot.send_typing(channel)
         try:
