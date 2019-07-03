@@ -159,7 +159,7 @@ class ExmBoard:
         await self.bot.send_typing(channel)
         try:
             # TEST
-            txt = Image.new('L', bgImage.size, 100)
+            txt = Image.new('L', bgImage.size, 0)
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 50)
             d = ImageDraw.Draw(txt)
             d.text((10, 10), 'TEST', font=fnt, fill=90)
