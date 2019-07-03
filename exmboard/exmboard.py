@@ -134,6 +134,7 @@ class ExmBoard:
             return
 
         if stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed']:
+           return await self.bot.say("Supported stats are 'deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed'")
 
         await self.bot.send_typing(channel)
         try:
