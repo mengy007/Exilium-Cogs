@@ -76,11 +76,11 @@ class ExmBoard:
                 self.settings[server.id]['players'].append(playername)
                 self.save_json()                
                 await self.bot.say('Player added to leaderboard')
-                update_player_data()
-                return await self.bot.say('Player added to leaderboard')
+                await self.bot.say('Player data updating may take a few minutes')
+                return await update_player_data()
             
             else:
-                return await self.bot.say('Player data updating may take a few minutes')
+                return await self.bot.say('Player not found in Origin')
         
 
     @_group.command(name='remove', pass_context=True, no_pm=True)
@@ -95,9 +95,9 @@ class ExmBoard:
         if playername in self.settings[server.id]['players']:
             self.settings[server.id]['players'].remove(playername)
             self.save_json()
-            await self.bot.say('Player removed from leaderboard')
-            update_player_data()
-            return await self.bot.say('Player data updating may take a few minutes')
+            await self.bot.say('Player removed from leaderboard')            
+            await self.bot.say('Player data updating may take a few minutes')
+            return await update_player_data()
 
         await self.bot.say('Player not on leaderboard')
 
