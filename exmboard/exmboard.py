@@ -247,11 +247,11 @@ class ExmBoard:
                 await self.bot.send_message(ctx.message.channel, page)
 
 async def create_placed_image(self, ctx, player, scope, stat, place):
-    fillColor = "#cd7f32"
+    fillColor = "#b08d57" # bronze
     if place == 2:
-        fillColor = "#C0C0C0"
+        fillColor = "#C0C0C0" # silver
     elif place == 1:
-        fillColor = "#D4AF37"
+        fillColor = "#D4AF37" # gold
 
     playerImage = Image.new('RGB', (500, 500), fillColor)
     return playerImage
