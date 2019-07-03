@@ -159,11 +159,11 @@ class ExmBoard:
         await self.bot.send_typing(channel)
         try:
             # TEST
-            txt = Image.new('RGB', bgImage.size, 255)
+            txt = Image.new('L', bgImage.size, 255)
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 50)
             d = ImageDraw.Draw(txt)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
-            d.text((10, 10), '[EXM] ' + scope.upper() + ' ' + stat.upper() + ' LEADERBOARD', font=fnt, fill=(255,255,255))
+            d.text((10, 10), '[EXM] ' + scope.upper() + ' ' + stat.upper() + ' LEADERBOARD', font=fnt, fill=1)
             bgImage.putalpha(txt)
             #out = Image.alpha_composite(bgImage, txt)
             with io.BytesIO() as out:
