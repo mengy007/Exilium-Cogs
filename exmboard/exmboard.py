@@ -169,7 +169,10 @@ class ExmBoard:
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaders'
             w, h = d.textsize(headerText, font=headerFont)
-            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill="rgb(255,255,255)")
+            d.text(((bigW - w) / 2, 10), headerText, font=headerFont, fill="rgb(255,255,255)")
+            
+            # background stuff
+            d.line([(50, 500), (50, bigW-50)], fill="rgb(255,255,255)", width=5)
 
             #bgImage.putalpha(txt)            
             #with io.BytesIO() as out:
