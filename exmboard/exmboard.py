@@ -142,9 +142,9 @@ class ExmBoard:
 
             print("Unsorted: " + json.dumps(players));
 
-            sortedPlayers = collections.OrderedDict(sorted(players, key=lambda i: (i['deaths'], i['name'])))
+            sortedPlayers = sorted(players, key=lambda i: i['deaths'], reverse=True)
 
-            print("Sorted: " + json.dumps(sortedPlayers));
+            print("Sorted: " + sortedPlayers);
 
             await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
