@@ -271,7 +271,7 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     avatarImageFile = io.BytesIO(avatar.read())                
     avatarImage = Image.open(avatarImageFile).convert('RGB').resize((200, 200), Image.ANTIALIAS)
     avatarCrop = avatarImage.crop((0, 0, 200, 200))
-    playerImage.paste(avatarCrop, (150, 55))
+    playerImage.paste(avatarCrop, (150, 75))
     d = ImageDraw.Draw(playerImage)
     placeString = str(place) + "st."
     if place == 2:
@@ -282,9 +282,9 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     w, h = d.textsize(placeString, font=headerFont)
     d.text((int(250 - (w / 2)), 10), placeString, font=headerFont, fill="rgb(255,255,255)")
     w, h = d.textsize(playerNameString, font=fnt)
-    d.text((int(250 - (w / 2)), 300), playerNameString, font=fnt, fill="rgb(255,255,255)")
+    d.text((int(250 - (w / 2)), 320), playerNameString, font=fnt, fill="rgb(255,255,255)")
     w, h=d.textsize(value, font=fnt)
-    d.text((int(250 - (w / 2)), 350), value, font=fnt, fill="rgb(255,255,255)")
+    d.text((int(250 - (w / 2)), 370), value, font=fnt, fill="rgb(255,255,255)")
 
     return playerImage
 
