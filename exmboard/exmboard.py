@@ -219,7 +219,7 @@ class ExmBoard:
             botMessage += "```"
             await self.bot.say(botMessage)
 
-            bgImage.putalpha(txt)
+            #bgImage.putalpha(txt)
             with io.BytesIO() as out:
                 bgImage.save(out, 'PNG')
                 await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
