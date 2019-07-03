@@ -183,7 +183,7 @@ class ExmBoard:
                 botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
                 count += 1
 
-                if limit not == 'all' and count > limit:
+                if limit != 'all' and count > limit:
                     break
 
             botMessage += "```"
