@@ -173,9 +173,14 @@ class ExmBoard:
             
             # background stuff
             lineY = 650
+            labelY = 590
             d.line([(50, lineY), (bigW - 50, lineY)], fill="rgb(255,255,255)", width=5)
-            d.text((50, 590), 'Player', font=fnt, fill="rgb(255,255,255)")
-            d.text((int(bigW/2)+85, 590), 'Player', font=fnt, fill="rgb(255,255,255)")
+            d.text((50, labelY), 'Player', font=fnt, fill="rgb(255,255,255)")
+            d.text((int(bigW / 2) + 90, labelY), 'Player', font=fnt, fill="rgb(255,255,255)")
+            statLabel = stat.lower()
+            w, h = d.textsize(stateLabel, font=fnt)
+            d.text((int((bigW / 2) - w - 5), labelY), statLabel, font=fnt, fill="rgb(255,255,255)")
+            d.text((int(bigW - w - 5), labelY), statLabel, font=fnt, fill="rgb(255,255,255)")
 
             #bgImage.putalpha(txt)            
             #with io.BytesIO() as out:
