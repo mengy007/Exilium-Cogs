@@ -160,7 +160,7 @@ class ExmBoard:
         await self.bot.send_typing(channel)
         try:
             # TEST
-            txt = Image.new('L', bgImage.size, 255)
+            txt = Image.new('RGB', bgImage.size, 255)
             bigW, bigH = bgImage.size
             headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=50)
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', size=50)
@@ -168,7 +168,7 @@ class ExmBoard:
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
             w, h = d.textsize(headerText, font=headerFont)
-            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill=0)
+            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill=(255, 255, 255))
 
             #bgImage.putalpha(txt)            
             #with io.BytesIO() as out:
@@ -209,7 +209,7 @@ class ExmBoard:
                 bgImage.paste(avatarCrop, (50, 100+(count*50)))
                 
                 # name and scores
-                d.text((110, 100+(count*50)), "[" + str(count) + "] " + player['name'] + ": " + value, font=fnt, fill=0)
+                d.text((110, 100+(count*50)), "[" + str(count) + "] " + player['name'] + ": " + value, font=fnt, fill=(255, 255, 255))
 
                 count += 1
 
