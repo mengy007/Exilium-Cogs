@@ -200,7 +200,7 @@ class ExmBoard:
                 else:
                     value = '{:,}'.format(player['value'])
 
-                botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
+                botMessage += str(count) + ". " + player['name'] + ": " + value + "\n"
                 # avatar images
                 avatar = urllib.urlopen(player['avatarUrl'])
                 avatarImageFile = io.BytesIO(avatar.read())                
