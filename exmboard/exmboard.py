@@ -210,7 +210,7 @@ class ExmBoard:
                         placedImage.resize((400, 400))
                         if count == 2:
                             pX = (bigW / 2) - 400 - 250
-                            pY =  150)
+                            pY =  150
                         elif count == 3:
                             pX = (bigW / 2) + 250
                             pY = 150
