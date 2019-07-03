@@ -133,14 +133,17 @@ class ExmBoard:
         if channel.id not in self.settings[server.id]['whitelist']:
             return
 
-        if scope not in ['all', 'assault', 'recon', 'support', 'medic', 'tanker', 'pilot']:
+        if scope not in ['all', 'assault', 'recon', 'support', 'medic', 'tanker', 'pilot', 'firestorm']:
             return await self.bot.say("`Supported stat scopes are 'all', 'assault', 'recon', 'support', 'medic', 'tanker', 'pilot'")
 
         if scope == 'all' and stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed', 'kdRatio']:
             return await self.bot.say("`Supported stats are 'deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed', 'kdRatio'`")
-        else:
-            if (stat not in ['deaths', 'kills', 'kdRatio']):
-                return await self.bot.say("`Supported class stats are 'deaths', 'kills', 'kdRatio'`")
+        
+        if scope in ['assault', 'recon', 'medic', 'tanker', 'support', 'pilot'] and stat not in ['deaths', 'kills', 'kdRatio']):
+            return await self.bot.say("`Supported class stats are 'deaths', 'kills', 'kdRatio'`")
+
+        if scope == 'firestorm' and stat not in ['kills', 'safes', 'squadWins', 'roadKills', 'supplyDrops', 'headshots', 'downs', 'soloWins', 'soloLosses', 'squadLosses', 'teamKills', 'timePlayed', 'kdRatio', 'killsPerMatch', 'killsPerMinute']:
+            return await self.bot.say("`Supported firestorm stats are 'kills', 'safes', 'squadWins', 'roadKills', 'supplyDrops', 'headshots', 'downs', 'soloWins', 'soloLosses', 'squadLosses', 'teamKills', 'timePlayed', 'kdRatio', 'killsPerMatch', 'killsPerMinute'`")
 
         await self.bot.send_typing(channel)
         try:
@@ -195,6 +198,8 @@ async def fetch_stats(self, ctx, playername, scope, stat):
         #print("JSON: " + json.dumps(jsonObj));
         if scope == 'all':
             return {'name': playername, 'value': jsonObj['data']['stats'][stat]['value']}
+        elif scope == 'firestorm':
+            return {'name': playername, 'value': jsonObj['data']['statsFirestorm'][stat]['value']}
         else:
             classIndex = {
               'assault': 0,
