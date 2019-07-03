@@ -269,15 +269,22 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     playerImage = Image.new('RGB', (500, 500), fillColor)
     avatar = urllib.urlopen(player['avatarUrl'])
     avatarImageFile = io.BytesIO(avatar.read())                
-    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((100, 100), Image.ANTIALIAS)
-    avatarCrop = avatarImage.crop((0, 0, 100, 100))
-    playerImage.paste(avatarCrop, (200, 10))
+    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((200, 200), Image.ANTIALIAS)
+    avatarCrop = avatarImage.crop((0, 0, 200, 200))
+    playerImage.paste(avatarCrop, (150, 55))
     d = ImageDraw.Draw(playerImage)
-    playerNameString = str(place) + ". " + player['name']
+    placeString = str(place) + "st."
+    if place == 2:
+        placeString = str(place) + "nd."
+    elif place == 3:
+        placeString = str(place) + "rd."
+    playerNameString = player['name']
+    w, h = d.textsize(placeString, fnt=headerFont)
+    d.text((int(250 - (w / 2)), 10), placeString, font=headerFont, fill="rgb(255,255,255)")
     w, h = d.textsize(playerNameString, font=fnt)
-    d.text((int(250 - (w / 2)), 250), playerNameString, font=fnt, fill="rgb(255,255,255)")
+    d.text((int(250 - (w / 2)), 300), playerNameString, font=fnt, fill="rgb(255,255,255)")
     w, h=d.textsize(value, font=fnt)
-    d.text((int(250 - (w / 2)), 300), value, font=fnt, fill="rgb(255,255,255)")
+    d.text((int(250 - (w / 2)), 350), value, font=fnt, fill="rgb(255,255,255)")
 
     return playerImage
 
