@@ -142,7 +142,7 @@ class ExmBoard:
 
             print("Unsorted: " + json.dumps(players));
 
-            sortedPlayers = collections.OrderedDict(sorted(players, key=lambda i: i['deaths']))
+            sortedPlayers = collections.OrderedDict(sorted(players, key=lambda i: (i['deaths'], i['name'])))
 
             print("Sorted: " + json.dumps(sortedPlayers));
 
