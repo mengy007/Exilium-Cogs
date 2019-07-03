@@ -168,7 +168,7 @@ class ExmBoard:
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
             w, h = d.textsize(headerText, font=headerFont)
-            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill='#ffffff')
+            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill=255)
 
             #bgImage.putalpha(txt)            
             #with io.BytesIO() as out:
