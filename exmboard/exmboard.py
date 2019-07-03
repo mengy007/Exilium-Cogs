@@ -9,6 +9,8 @@ import io
 from .utils import checks
 
 import json
+import operator
+import collections
 
 path = 'data/exilium/exmboard'
 
@@ -139,10 +141,12 @@ class ExmBoard:
                 #await self.bot.say(player)
 
             # SORTING
+            sortedObj = sorted(players.items(), key=lambda kv: kv[1])
+            sortedPlayers = collections.OrderedDict(sortedObj)
 
             await self.bot.say('DEATH LEADERBOARD TEST')
-            for player in players:
-                await self.bot.say(player.name + ": " + player.deaths)
+            for player in sortedPlayers:
+                await self.bot.say(player['name'] + ": " + player['deaths'])
 
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
