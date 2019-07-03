@@ -144,7 +144,7 @@ class ExmBoard:
 
             sortedPlayers = sorted(players, key=lambda i: i['deaths'], reverse=True)
 
-            print("Sorted: " + sortedPlayers);
+            print("Sorted: ".join(map(str, sortedPlayers)))
 
             await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
