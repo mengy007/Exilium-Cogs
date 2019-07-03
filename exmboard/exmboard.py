@@ -203,10 +203,10 @@ class ExmBoard:
                 botMessage += "[" + str(count) + "] " + player['name'] + ": " + value + "\n"
                 avatar = urllib.urlopen(player['avatarUrl'])
                 avatarImageFile = io.BytesIO(avatar.read())                
-                avatarImage = Image.open(avatarImageFile).convert('RGB')
+                avatarImage = Image.open(avatarImageFile).convert('RGB').thumbnail((49, 49), Image.ANTIALIAS)
                 aW, aH = avatarImage.size
                 avatarCrop = avatarImage.crop((0, 0, aW, aH))
-                bgImage.paste(avatarCrop, (50, 100+(count*50), 100, 100+(count*50)+50))
+                bgImage.paste(avatarCrop, (50, 100+(count*50)))
                 count += 1
 
                 if limit > 0 and count > limit:
