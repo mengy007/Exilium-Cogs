@@ -12,6 +12,7 @@ from PIL import Image, ImageDraw, ImageFont
 import urllib.request as urllib
 import subprocess
 import os
+import math
 
 path = 'data/exilium/exmboard'
 
@@ -215,7 +216,7 @@ class ExmBoard:
             botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERS\n"
             count = 1
             #playersPerColumn = 25
-            playersPerColumn = int((len(sortedPlayers) - 3) / 2)
+            playersPerColumn = math.ceil((len(sortedPlayers) - 3) / 2)
             if playersPerColumn > 25:
               playersPerColumn = 25
 
