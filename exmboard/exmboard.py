@@ -15,6 +15,8 @@ import urllib.request as urllib
 path = 'data/exilium/exmboard'
 
 bgImage = Image.open(path + '/bg.png').convert('RGB')
+headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=60)
+fnt = ImageFont.truetype(path + '/futura.ttf', size=50)
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
@@ -162,8 +164,6 @@ class ExmBoard:
             # TEST
             txt = Image.new('RGB', bgImage.size, 255)
             bigW, bigH = bgImage.size
-            headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=60)
-            fnt = ImageFont.truetype(path + '/futura.ttf', size=50)
             d = ImageDraw.Draw(bgImage)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
@@ -203,7 +203,7 @@ class ExmBoard:
                 botMessage += str(count) + ". " + player['name'] + ": " + value + "\n"
                 # avatar images
                 if count < 4:
-                    placedImage = await create_placed_image(self, ctx, player, scope, stat, count)
+                    placedImage = await create_placed_image(self, ctx, player, scope, stat, count, value)
                     pX = 0
                     pY = 0
                     if count > 1:
@@ -260,14 +260,25 @@ class ExmBoard:
             for page in pages:
                 await self.bot.send_message(ctx.message.channel, page)
 
-async def create_placed_image(self, ctx, player, scope, stat, place):
+async def create_placed_image(self, ctx, player, scope, stat, place, value):
     fillColor = "#b08d57" # bronze
     if place == 2:
         fillColor = "#C0C0C0" # silver
     elif place == 1:
         fillColor = "#D4AF37" # gold
-
     playerImage = Image.new('RGB', (500, 500), fillColor)
+    avatar = urllib.urlopen(player['avatarUrl'])
+    avatarImageFile = io.BytesIO(avatar.read())                
+    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((100, 100), Image.ANTIALIAS)
+    avatarCrop = avatarImage.crop((0, 0, 100, 100))
+    playerImage.paste(avatarCrop, (200, 10))
+    d = ImageDraw.Draw(playerImage)
+    playerNameString = str(place) + ". " + player['name']
+    w, h = d.textsize(playerNameString, font=fnt)
+    d.text((int(250 - (w / 2)), 250), playerNameString, font=fnt, fill="rgb(255,255,255)")
+    w, h=d.textsize(value, font=fnt)
+    d.text((int(250 - (w / 2)), 300), value, font=fnt, fill="rgb(255,255,255")
+
     return playerImage
 
 async def fetch_stats(self, ctx, playername, scope, stat):
