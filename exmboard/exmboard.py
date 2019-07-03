@@ -178,7 +178,7 @@ class ExmBoard:
             d.text((50, labelY), 'Player', font=fnt, fill="rgb(255,255,255)")
             d.text((int(bigW / 2) + 90, labelY), 'Player', font=fnt, fill="rgb(255,255,255)")
             statLabel = stat.lower()
-            w, h = d.textsize(stateLabel, font=fnt)
+            w, h = d.textsize(statLabel, font=fnt)
             d.text((int((bigW / 2) - w - 5), labelY), statLabel, font=fnt, fill="rgb(255,255,255)")
             d.text((int(bigW - w - 5), labelY), statLabel, font=fnt, fill="rgb(255,255,255)")
 
