@@ -172,7 +172,8 @@ class ExmBoard:
             d.text(((bigW - w) / 2, 10), headerText, font=headerFont, fill="rgb(255,255,255)")
             
             # background stuff
-            d.line([(50, 500), (50, bigW-50)], fill="rgb(255,255,255)", width=5)
+            lineY = 600
+            d.line([(50, lineY), (bigW-50, lineY)], fill="rgb(255,255,255)", width=5)
 
             #bgImage.putalpha(txt)            
             #with io.BytesIO() as out:
