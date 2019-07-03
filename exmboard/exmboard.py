@@ -160,9 +160,9 @@ class ExmBoard:
         try:
             # TEST
             txt = Image.new('L', bgImage.size, 100)
-            fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 90)
+            fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 50)
             d = ImageDraw.Draw(txt)
-            d.text((10, 10), 'TEST', font=fnt, fill=50)
+            d.text((10, 10), 'TEST', font=fnt, fill=90)
             bgImage.putalpha(txt)
             #out = Image.alpha_composite(bgImage, txt)
             with io.BytesIO() as out:
