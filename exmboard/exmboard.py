@@ -122,7 +122,7 @@ class ExmBoard:
         await self.bot.say('Settings reset')
 
     @commands.command(pass_context=True, no_pm=True, name="exmboard")
-    async def exmboard(self, ctx, stat):
+    async def exmboard(self, ctx, scope, stat):
         """Leaderboard Stats"""
 
         server = ctx.message.server
@@ -133,22 +133,28 @@ class ExmBoard:
         if channel.id not in self.settings[server.id]['whitelist']:
             return
 
-        if stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed']:
-           return await self.bot.say("Supported stats are 'deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed'")
+        if scope not in ['all', 'assault', 'recon', 'support', 'medic', 'tanker', 'pilot']:
+            return await self.bot.say("`Supported stat scopes are 'all', 'assault', 'recon', 'support', 'medic', 'tanker', 'pilot'")
+
+        if scope == 'all' and stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed']:
+            return await self.bot.say("`Supported stats are 'deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed'`")
+        else:
+            if (stat not in ['deaths', 'kills', 'kdRatio']):
+                return await self.bot.say("`Supported class stats are 'deaths', 'kills', 'kdRatio'`")
 
         await self.bot.send_typing(channel)
         try:
             players = []
             for player in self.settings[server.id]['players']:
-                players.append(await fetch_stats(self, ctx, player, stat))
+                players.append(await fetch_stats(self, ctx, player, scope, stat))
                 #await self.bot.say(player)
 
-            print("Unsorted: " + json.dumps(players) + "\n");
+            #print("Unsorted: " + json.dumps(players) + "\n");
 
             sortedPlayers = sorted(players, key=lambda i: i['value'], reverse=True)
 
-            print("Sorted: ")
-            print("\n".join(map(str, sortedPlayers)))
+            #print("Sorted: ")
+            #print("\n".join(map(str, sortedPlayers)))
 
             botMessage = "```css\n[EXM] " + stat.upper() + " LEADERBOARD\n"
             count = 1
@@ -179,7 +185,7 @@ class ExmBoard:
             for page in pages:
                 await self.bot.send_message(ctx.message.channel, page)
 
-async def fetch_stats(self, ctx, playername, stat):
+async def fetch_stats(self, ctx, playername, scope, stat):
     url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername
     
     print("URL: " + url)
@@ -187,7 +193,19 @@ async def fetch_stats(self, ctx, playername, stat):
     async with aiohttp.get(url) as response:
         jsonObj = await response.json()
         #print("JSON: " + json.dumps(jsonObj));
-        return {'name': playername, 'value': jsonObj['data']['stats'][stat]['value']}
+        if scope == 'all':
+            return {'name': playername, 'value': jsonObj['data']['stats'][stat]['value']}
+        else:
+            classIndex = {
+              'assault': 0,
+              'medic': 1,
+              'pilot': 2,
+              'recon': 3,
+              'support': 4,
+              'tanker': 5
+            }
+            
+            return {'name': playername, 'value': jsonObj['data']['classes'][classIndex][stat]['value']}
         #return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
 
 
