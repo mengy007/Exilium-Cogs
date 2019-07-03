@@ -165,7 +165,7 @@ class ExmBoard:
             #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
                 #await self.bot.say(player['name'] + ": " + str(player['deaths']))
-                botMessage += "[" + str(count) + "] " + player['name'] + ": " + str(player['value']) + "\n"
+                botMessage += "[" + str(count) + "] " + player['name'] + ": " + '{0:.3g}'.format(player['value']) + "\n"
                 count += 1
 
             botMessage += "```"
