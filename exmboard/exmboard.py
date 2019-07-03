@@ -164,7 +164,7 @@ class ExmBoard:
             bigW, bigH = bgImage.size
             headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=50)
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', size=50)
-            d = ImageDraw.Draw(txt)
+            d = ImageDraw.Draw(bgImage)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
             w, h = d.textsize(headerText, font=headerFont)
@@ -219,16 +219,10 @@ class ExmBoard:
             botMessage += "```"
             await self.bot.say(botMessage)
 
-            #bgImage.putalpha(txt)
-            #with io.BytesIO() as out:
-            #    bgImage.save(out, 'PNG')
-            #    await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
-
-            finalImage = Image.alpha_composite(bgImage, txt)
+            bgImage.putalpha(txt)
             with io.BytesIO() as out:
-                finalImage.save(out, 'PNG')
+                bgImage.save(out, 'PNG')
                 await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
-
 
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
