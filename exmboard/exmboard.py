@@ -209,13 +209,13 @@ class ExmBoard:
                     if count > 1:
                         placedImage.resize((400, 400))
                         if count == 2:
-                            pX = (bigW / 2) - 400 - 250
+                            pX = int((bigW / 2) - 400 - 250)
                             pY =  150
                         elif count == 3:
-                            pX = (bigW / 2) + 250
+                            pX = int((bigW / 2) + 250)
                             pY = 150
                     else:
-                        pX = (bigW / 2) - 250
+                        pX = int((bigW / 2) - 250)
                         pY = 100
 
                     pW, pH = placedImage.size
