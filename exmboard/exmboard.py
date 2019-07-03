@@ -140,11 +140,12 @@ class ExmBoard:
                 players.append(await fetch_stats(self, ctx, player))
                 #await self.bot.say(player)
 
-            print("Unsorted: " + json.dumps(players));
+            print("Unsorted: " + json.dumps(players) + "\n");
 
             sortedPlayers = sorted(players, key=lambda i: i['deaths'], reverse=True)
 
-            print("Sorted: ".join(map(str, sortedPlayers)))
+            print("Sorted: ")
+            print("\n".join(map(str, sortedPlayers)))
 
             await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
