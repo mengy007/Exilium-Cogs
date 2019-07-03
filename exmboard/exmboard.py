@@ -166,8 +166,8 @@ class ExmBoard:
             d = ImageDraw.Draw(txt)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
-            w, h = d.textsize(headerText)
-            d.text(((bigW -w ) / 2, 10), headerText, font=headerFont, fill=0)
+            w, h = d.textsize(headerText, font=headerFont)
+            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill=0)
             bgImage.putalpha(txt)
             #out = Image.alpha_composite(bgImage, txt)
             with io.BytesIO() as out:
