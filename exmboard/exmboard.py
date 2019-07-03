@@ -147,7 +147,7 @@ class ExmBoard:
             print("Sorted: ")
             print("\n".join(map(str, sortedPlayers)))
 
-            botMessage = "`[EXM] DEATH LEADERBOARD'\n"
+            botMessage = "`**[EXM] DEATH LEADERBOARD**\n"
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
