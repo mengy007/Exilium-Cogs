@@ -253,8 +253,9 @@ class ExmBoard:
                     d.text((textX, textY), str(count) + ". " + player['name'], font=fnt, fill="rgb(255,255,255)")
                     w, h = d.textsize(value, font=fnt)
                     valueX = int((bigW / 2) - w - 50)
-                    if count > 11:
+                    if count > playersPerColumn + 3:
                         valueX = int(bigW - w - 50)
+                        
                     d.text((valueX, textY), value, font=fnt, fill="rgb(255,255,255)")
 
                 count += 1
