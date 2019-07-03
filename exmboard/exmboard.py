@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 path = 'data/exilium/exmboard'
 
-bgImage = Image.open(path + '/bg.png')
+bgImage = Image.open(path + '/bg.jpg')
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
@@ -160,7 +160,7 @@ class ExmBoard:
         try:
             # TEST
             txt = Image.new('L', bgImage.size, 50)
-            fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 100)
+            fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', 50)
             d = ImageDraw.Draw(txt)
             d.text((10, 10), 'TEST', font=fnt, fill=50)
             bgImage.putalpha(txt)
