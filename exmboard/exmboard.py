@@ -229,6 +229,9 @@ class ExmBoard:
                     avatarCrop = avatarImage.crop((0, 0, 49, 49))
                     textX = 110
                     textY = (450 + (count * 50))
+                    if count > 11:
+                        textX = int((bigW / 2) + 50)
+                        textY = (450 + ((count-8) * 50))
                     bgImage.paste(avatarCrop, (50, textY+2))
                     # name and scores
                     d.text((textX, textY), str(count) + ". " + player['name'], font=fnt, fill="rgb(255,255,255)")
