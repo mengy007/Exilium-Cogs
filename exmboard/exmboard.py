@@ -11,6 +11,7 @@ import collections
 from PIL import Image, ImageDraw, ImageFont
 import urllib.request as urllib
 import subprocess
+import os
 
 path = 'data/exilium/exmboard'
 
@@ -292,7 +293,8 @@ class ExmBoard:
                 await self.bot.send_message(ctx.message.channel, page)
 
 async def update_player_data():
-    subprocess.run(["python3", "cron.py"])
+    print('Path: ' + os.path.dirname(os.path.realpath(__file__)))
+    subprocess.run([os.path.dirname(os.path.realpath(__file__)) + "/cron.sh"])
 
 async def create_placed_image(self, ctx, player, scope, stat, place, value):
     fillColor = "#b08d57" # bronze
