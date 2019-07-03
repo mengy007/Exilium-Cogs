@@ -162,13 +162,13 @@ class ExmBoard:
             # TEST
             txt = Image.new('L', bgImage.size, 255)
             bigW, bigH = bgImage.size
-            headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=75)
+            headerFont = ImageFont.truetype(path + '/battlefieldv4.ttf', size=50)
             fnt = ImageFont.truetype(path + '/AnkaCoder-r.ttf', size=50)
             d = ImageDraw.Draw(txt)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
             headerText = scope.lower() + ' ' + stat.lower() + ' leaderboard'
             w, h = d.textsize(headerText, font=headerFont)
-            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill=0)
+            d.text(((bigW-w)/2, 10), headerText, font=headerFont, fill='white')
 
             #bgImage.putalpha(txt)            
             #with io.BytesIO() as out:
