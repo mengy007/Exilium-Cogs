@@ -144,6 +144,8 @@ class ExmBoard:
 
             sortedPlayers = collections.OrderedDict(sorted(players, key=lambda i: i['deaths']))
 
+            print(json.dumps(sortedPlayers));
+
             await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
                 await self.bot.say(player['name'] + ": " + player['deaths'])
