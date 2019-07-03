@@ -219,10 +219,16 @@ class ExmBoard:
             botMessage += "```"
             await self.bot.say(botMessage)
 
-            bgImage.putalpha(txt)            
+            #bgImage.putalpha(txt)
+            #with io.BytesIO() as out:
+            #    bgImage.save(out, 'PNG')
+            #    await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
+
+            finalImage = Image.alpha_composite(bgImage, txt)
             with io.BytesIO() as out:
-                bgImage.save(out, 'PNG')
+                finalImage.save(out, 'PNG')
                 await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
+
 
         except Exception as e:
             #await self.bot.say("error: " + e.message + " -- " + e.args)
