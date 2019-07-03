@@ -318,10 +318,10 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
     if scope == 'all':
         return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['stats'][stat]['value']}
     elif scope == 'firestorm':
-        value = 'N/A'
+        value = 0
         if player['data']['statsFirestorm'] and player['data']['statsFirestorm'][stat] and player['data']['statsFirestorm'][stat]['value']:
             value = player['data']['statsFirestorm'][stat]['value']
-            
+
         return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': value}
     else:
         classIndex = {
