@@ -230,9 +230,9 @@ class ExmBoard:
                     textX = 110
                     textY = (450 + (count * 50))
                     if count > 11:
-                        textX = int((bigW / 2) + 50)
+                        textX = int((bigW / 2) + 150)
                         textY = (450 + ((count-8) * 50))
-                    bgImage.paste(avatarCrop, (50, textY+2))
+                    bgImage.paste(avatarCrop, (textX-50, textY+2))
                     # name and scores
                     d.text((textX, textY), str(count) + ". " + player['name'], font=fnt, fill="rgb(255,255,255)")
                     w, h = d.textsize(value, font=fnt)
