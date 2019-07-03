@@ -175,7 +175,7 @@ class ExmBoard:
             lineY = 650
             d.line([(50, lineY), (bigW - 50, lineY)], fill="rgb(255,255,255)", width=5)
             d.text((50, 590), 'Player', font=fnt, fill="rgb(255,255,255)")
-            d.text((int(bigW/2)+80, 590), 'Player', font=fnt, fill="rgb(255,255,255)")
+            d.text((int(bigW/2)+85, 590), 'Player', font=fnt, fill="rgb(255,255,255)")
 
             #bgImage.putalpha(txt)            
             #with io.BytesIO() as out:
@@ -217,13 +217,13 @@ class ExmBoard:
                         placedImage = placedImage.resize((400, 400), Image.ANTIALIAS)
                         if count == 2:
                             pX = int((bigW / 2) - 400 - 250)
-                            pY =  150
+                            pY =  140
                         elif count == 3:
                             pX = int((bigW / 2) + 250)
-                            pY = 150
+                            pY = 140
                     else:
                         pX = int((bigW / 2) - 250)
-                        pY = 100
+                        pY = 90
 
                     pW, pH = placedImage.size
                     avatarCrop = placedImage.crop((0, 0, pW, pH))
