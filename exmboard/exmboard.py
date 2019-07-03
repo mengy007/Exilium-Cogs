@@ -192,7 +192,7 @@ class ExmBoard:
             players = []
             for player in self.settings[server.id]['playerData']:
                 players.append(await fetch_local_stats(self, ctx, player, scope, stat))
-                
+
             #for player in self.settings[server.id]['players']:
             #    players.append(await fetch_stats(self, ctx, player, scope, stat))
 
@@ -316,9 +316,9 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
 
 async def fetch_local_stats(self, ctx, player, scope, stat):
     if scope == 'all':
-        return {'name': player['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['stats'][stat]['value']}
+        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['stats'][stat]['value']}
     elif scope == 'firestorm':
-        return {'name': player['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['statsFirestorm'][stat]['value']}
+        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['statsFirestorm'][stat]['value']}
     else:
         classIndex = {
             'assault': 0,
@@ -329,7 +329,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
             'tanker': 5
         }
         
-        return {'name': player['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
+        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
  
 
 async def fetch_stats(self, ctx, playername, scope, stat):
