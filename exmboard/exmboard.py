@@ -131,7 +131,7 @@ class ExmBoard:
         await self.bot.say('Settings reset')
 
     @commands.command(pass_context=True, no_pm=True, name="exmboard")
-    async def exmboard(self, ctx, scope, stat, limit):
+    async def exmboard(self, ctx, scope, stat, limit = "all"):
         """Leaderboard Stats"""
 
         server = ctx.message.server
