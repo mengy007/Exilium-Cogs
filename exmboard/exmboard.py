@@ -218,7 +218,7 @@ class ExmBoard:
 
             #playersPerColumn = 25
             playersPerColumn = math.ceil((len(sortedPlayers) - 3) / 2)
-            if limit < len(sortedPlayers):
+            if limit > 0 and limit < len(sortedPlayers):
               playersPerColumn = math.ceil((limit - 3) / 2)
             if playersPerColumn > 25:
               playersPerColumn = 25
