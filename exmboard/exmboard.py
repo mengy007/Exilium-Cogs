@@ -70,7 +70,7 @@ class ExmBoard:
         self.init_server(server)
 
         if self.settings[server.id]['recruits'][playername]:
-          self.settings[server.id]['recruits'][playername]++
+          self.settings[server.id]['recruits'][playername] += 1
         else:
           self.settings[server.id]['recruits'][playername] = 1        
 
@@ -91,7 +91,7 @@ class ExmBoard:
           if self.settings[server.id]['recruits'][playername] == 0:
             return await self.bot.say(playername + ' currently has 0 recruits!')
           else:
-            self.settings[server.id]['recruits'][playername]--
+            self.settings[server.id]['recruits'][playername] -= 1
         else:
           return await self.bot.say(playername + ' currently has 0 recruits!')
 
