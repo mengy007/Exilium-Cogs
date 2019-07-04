@@ -264,8 +264,8 @@ class ExmBoard:
             playersPerColumn = math.ceil((len(sortedPlayers) - 3) / 2)
             if limit > 0 and limit < len(sortedPlayers):
               playersPerColumn = math.ceil((limit - 3) / 2)
-            if playersPerColumn > 25:
-              playersPerColumn = 25
+            if playersPerColumn > 50:
+              playersPerColumn = 50
 
             #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
