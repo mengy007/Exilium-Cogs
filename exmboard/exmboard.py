@@ -194,7 +194,7 @@ class ExmBoard:
         server = ctx.message.server
         channel = ctx.message.channel
         bgImage = Image.open(path + '/bg.png').convert('RGB')
-        validScopes = [assault', 'recon', 'support', 'medic', 'tanker', 'pilot', 'firestorm']
+        validScopes = ['assault', 'recon', 'support', 'medic', 'tanker', 'pilot', 'firestorm']
         validFirestormStats = ['squadLosses', 'safes', 'killsPerMinute', 'squadWins', 'roadKills', 'vehicleBreakouts', 'vehiclesDestroyed', 'matchesPlayed', 'tanks', 'capturePoints', 'healing', 'kills', 'supplyDrops', 'killsPerMatch', 'headshots', 'timePlayed', 'vehicleWeaponKills', 'soloLosses', 'downs', 'soloWinPercentage', 'deaths', 'teamKills', 'kdRatio', 'soloWins', 'killsMelee', 'revives', 'squadWinPercentage']
         validAllStats = ['saviorKills', 'scoreCombat', 'scoreAssault', 'wlPercentage', 'scoreGeneral', 'rank', 'scoreAward', 'headshots', 'shotsAccuracy', 'assistsAsKills', 'longestHeadshot', 'dogtagsTaken', 'draws', 'scoreDefensive', 'scoreSquad', 'avengerKills', 'losses', 'revivesRecieved', 'rounds', 'killStreak', 'deaths', 'damage', 'scoreLand', 'assists', 'scoreRecon', 'squadWipes', 'timePlayed', 'repairs', 'scoreAir', 'scoreSupport', 'heals', 'resupplies', 'scoreBonus', 'squadSpawns', 'damagePerMinute', 'rankScore', 'scoreRound', 'killsPerMinute', 'ordersCompleted', 'shotsHit', 'aceSquad', 'scorePerMinute', 'scoreTransports', 'shotsTaken', 'scoreObjective', 'scoreMedic', 'suppressionAssists', 'roundsPlayed', 'killsAggregated', 'kills', 'revives', 'scoreTanks', 'wins', 'kdRatio']
         validClassStats = ['deaths', 'kills', 'kdRatio', 'shotsFired', 'shotsHit', 'score', 'killsPerMinute', 'scorePerMinute', 'timePlayed', 'shotsAccuracy']
