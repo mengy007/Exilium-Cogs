@@ -174,11 +174,15 @@ class ExmBoard:
             #reload settings
             self.settings = dataIO.load_json(path + '/settings.json')
 
-            txt = Image.new('RGB', bgImage.size, 255)
             bigW, bigH = bgImage.size
             d = ImageDraw.Draw(bgImage)
             #d.rectangle([(0, 0), bgImage.size], fill=50, outline=None, width=0)
-            headerText = scope.lower() + ' ' + stat.lower() + ' leaders'
+            
+            # Header text
+            headerText = stat.lower() + ' leaders'
+            if scope.lower() != 'all':
+                headerText = scope.lower() + ' ' + headerText
+
             w, h = d.textsize(headerText, font=headerFont)
             d.text(((bigW - w) / 2, 10), headerText, font=headerFont, fill="rgb(255,255,255)")
             
