@@ -47,7 +47,7 @@ class ExmBoard:
               'recruits': {}
             }
         else:
-            if not self.settings[server.id]['recruits']:
+            if 'recruits' not in self.settings[server.id]:
                 self.settings[server.id]['recruits'] = {}
 
     @commands.group(name='exmboardset', pass_context=True, no_pm=True)
