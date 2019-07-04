@@ -43,8 +43,12 @@ class ExmBoard:
         if server.id not in self.settings or reset:
             self.settings[server.id] = {
               'whitelist': [],
-              'players': []
+              'players': [],
+              'recruits': {}
             }
+        else:
+            if not self.settings[server.id]['recruits']:
+                self.settings[server.id]['recruits'] = {}
 
     @commands.group(name='exmboardset', pass_context=True, no_pm=True)
     @checks.admin_or_permissions(manage_messages=True)
@@ -52,18 +56,54 @@ class ExmBoard:
         """
         settings for leaderboard
         """
-
         if ctx.invoked_subcommand is None:
             #await self.bot.send_help(ctx)
             #await ctx.send_help()
             await self.send_cmd_help(ctx)
+
+    @_group.command(name='addrecruit', pass_context=True, no_pm=True)
+    async def addrecruit(self, ctx, playername):
+        """
+        add recruit to player
+        """
+        server = ctx.message.server
+        self.init_server(server)
+
+        if self.settings[server.id]['recruits'][playername]:
+          self.settings[server.id]['recruits'][playername]++
+        else:
+          self.settings[server.id]['recruits'][playername] = 1        
+
+        self.save_json()
+        await self.bot.say('Recruit added to ' + playername)
+        return await self.bot.say(playername + ' currently has ' + str(self.settings[server.id]['recruits'][playername]) + ' recruits!')
+
+
+    @_group.command(name='removerecruit', pass_context=True, no_pm=True)
+    async def removerecruit(self, ctx, playername):
+        """
+        remove recruit to player
+        """
+        server = ctx.message.server
+        self.init_server(server)
+
+        if self.settings[server.id]['recruits'][playername]:
+          if self.settings[server.id]['recruits'][playername] == 0:
+            return await self.bot.say(playername + ' currently has 0 recruits!')
+          else:
+            self.settings[server.id]['recruits'][playername]--
+        else:
+          return await self.bot.say(playername + ' currently has 0 recruits!')
+
+        self.save_json()
+        await self.bot.say('Recruit removed from ' + playername)
+        return await self.bot.say(playername + ' currently has ' + str(self.settings[server.id]['recruits'][playername]) + ' recruits!')
 
     @_group.command(name='add', pass_context=True, no_pm=True)
     async def add(self, ctx, playername):
         """
         add a player to be tracked on leaderboard
         """
-
         server = ctx.message.server
         self.init_server(server)
 
