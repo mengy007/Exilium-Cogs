@@ -194,24 +194,27 @@ class ExmBoard:
         server = ctx.message.server
         channel = ctx.message.channel
         bgImage = Image.open(path + '/bg.png').convert('RGB')
+        validScopes = [assault', 'recon', 'support', 'medic', 'tanker', 'pilot', 'firestorm']
+        validFirestormStats = ['squadLosses', 'safes', 'killsPerMinute', 'squadWins', 'roadKills', 'vehicleBreakouts', 'vehiclesDestroyed', 'matchesPlayed', 'tanks', 'capturePoints', 'healing', 'kills', 'supplyDrops', 'killsPerMatch', 'headshots', 'timePlayed', 'vehicleWeaponKills', 'soloLosses', 'downs', 'soloWinPercentage', 'deaths', 'teamKills', 'kdRatio', 'soloWins', 'killsMelee', 'revives', 'squadWinPercentage']
+        validAllStats = ['saviorKills', 'scoreCombat', 'scoreAssault', 'wlPercentage', 'scoreGeneral', 'rank', 'scoreAward', 'headshots', 'shotsAccuracy', 'assistsAsKills', 'longestHeadshot', 'dogtagsTaken', 'draws', 'scoreDefensive', 'scoreSquad', 'avengerKills', 'losses', 'revivesRecieved', 'rounds', 'killStreak', 'deaths', 'damage', 'scoreLand', 'assists', 'scoreRecon', 'squadWipes', 'timePlayed', 'repairs', 'scoreAir', 'scoreSupport', 'heals', 'resupplies', 'scoreBonus', 'squadSpawns', 'damagePerMinute', 'rankScore', 'scoreRound', 'killsPerMinute', 'ordersCompleted', 'shotsHit', 'aceSquad', 'scorePerMinute', 'scoreTransports', 'shotsTaken', 'scoreObjective', 'scoreMedic', 'suppressionAssists', 'roundsPlayed', 'killsAggregated', 'kills', 'revives', 'scoreTanks', 'wins', 'kdRatio']
+        validClassStats = ['deaths', 'kills', 'kdRatio', 'shotsFired', 'shotsHit', 'score', 'killsPerMinute', 'scorePerMinute', 'timePlayed', 'shotsAccuracy']
 
         if server.id not in self.settings:
             return
         if channel.id not in self.settings[server.id]['whitelist']:
             return
 
-        if scope not in ['all', 'assault', 'recon', 'support', 'medic', 'tanker', 'pilot', 'firestorm']:
-            return await self.bot.say("`Supported stat scopes are 'all', 'assault', 'recon', 'support', 'medic', 'tanker', 'pilot'")
+        if scope not in validScopes or scope != 'all':
+            return await self.bot.say("`Supported stat scopes are " + str(validScopes) + "`")
 
-        if scope == 'all' and stat not in ['saviorKills', 'scoreCombat', 'scoreAssault', 'wlPercentage', 'scoreGeneral', 'rank', 'scoreAward', 'headshots', 'shotsAccuracy', 'assistsAsKills', 'longestHeadshot', 'dogtagsTaken', 'draws', 'scoreDefensive', 'scoreSquad', 'avengerKills', 'losses', 'revivesRecieved', 'rounds', 'killStreak', 'deaths', 'damage', 'scoreLand', 'assists', 'scoreRecon', 'squadWipes', 'timePlayed', 'repairs', 'scoreAir', 'scoreSupport', 'heals', 'resupplies', 'scoreBonus', 'squadSpawns', 'damagePerMinute', 'rankScore', 'scoreRound', 'killsPerMinute', 'ordersCompleted', 'shotsHit', 'aceSquad', 'scorePerMinute', 'scoreTransports', 'shotsTaken', 'scoreObjective', 'scoreMedic', 'suppressionAssists', 'roundsPlayed', 'killsAggregated', 'kills', 'revives', 'scoreTanks', 'wins', 'kdRatio']:
-        #if scope == 'all' and stat not in ['deaths', 'kills', 'headshots', 'longestHeadshot', 'losses', 'wins', 'rounds', 'killStreak', 'damage', 'assists', 'squadWipes', 'timePlayed', 'kdRatio']:
-            return await self.bot.say("`Supported stats are 'saviorKills', 'scoreCombat', 'scoreAssault', 'wlPercentage', 'scoreGeneral', 'rank', 'scoreAward', 'headshots', 'shotsAccuracy', 'assistsAsKills', 'longestHeadshot', 'dogtagsTaken', 'draws', 'scoreDefensive', 'scoreSquad', 'avengerKills', 'losses', 'revivesRecieved', 'rounds', 'killStreak', 'deaths', 'damage', 'scoreLand', 'assists', 'scoreRecon', 'squadWipes', 'timePlayed', 'repairs', 'scoreAir', 'scoreSupport', 'heals', 'resupplies', 'scoreBonus', 'squadSpawns', 'damagePerMinute', 'rankScore', 'scoreRound', 'killsPerMinute', 'ordersCompleted', 'shotsHit', 'aceSquad', 'scorePerMinute', 'scoreTransports', 'shotsTaken', 'scoreObjective', 'scoreMedic', 'suppressionAssists', 'roundsPlayed', 'killsAggregated', 'kills', 'revives', 'scoreTanks', 'wins', 'kdRatio'`")
+        if scope == 'all' and stat not in validAllStats:
+            return await self.bot.say("`Supported stats are " + str(validAllStats) + "`")
         
-        if scope in ['assault', 'recon', 'medic', 'tanker', 'support', 'pilot'] and stat not in ['deaths', 'kills', 'kdRatio', 'shotsFired', 'shotsHit', 'score', 'killsPerMinute', 'scorePerMinute', 'timePlayed', 'shotsAccuracy']:
-            return await self.bot.say("`Supported class stats are 'deaths', 'kills', 'kdRatio', 'shotsFired', 'shotsHit', 'score', 'killsPerMinute', 'scorePerMinute', 'timePlayed', 'shotsAccuracy'`")
+        if scope in validScopes and stat not in validClassStats:
+            return await self.bot.say("`Supported class stats are " + str(validClassStats) + "`")
 
-        if scope == 'firestorm' and stat not in ['kills', 'safes', 'squadWins', 'roadKills', 'supplyDrops', 'headshots', 'downs', 'soloWins', 'soloLosses', 'squadLosses', 'teamKills', 'timePlayed', 'kdRatio', 'killsPerMatch', 'killsPerMinute']:
-            return await self.bot.say("`Supported firestorm stats are 'kills', 'safes', 'squadWins', 'roadKills', 'supplyDrops', 'headshots', 'downs', 'soloWins', 'soloLosses', 'squadLosses', 'teamKills', 'timePlayed', 'kdRatio', 'killsPerMatch', 'killsPerMinute'`")
+        if scope == 'firestorm' and stat not in validFirestormStats:
+            return await self.bot.say("`Supported firestorm stats are " + str(validFirestormStats) + "`")
 
         await self.bot.send_typing(channel)
         try:
@@ -241,46 +244,29 @@ class ExmBoard:
             d.text((int((bigW / 2) - w - 50), labelY), statLabel, font=fnt, fill="rgb(255,255,255)")
             d.text((int(bigW - w - 50), labelY), statLabel, font=fnt, fill="rgb(255,255,255)")
 
-            #bgImage.putalpha(txt)            
-            #with io.BytesIO() as out:
-            #    bgImage.save(out, 'PNG')
-            #    await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.jpg')
-
-
             players = []
             for player in self.settings[server.id]['playerData']:
                 players.append(await fetch_local_stats(self, ctx, player, scope, stat))
 
-            #for player in self.settings[server.id]['players']:
-            #    players.append(await fetch_stats(self, ctx, player, scope, stat))
-
-            #print("Unsorted: " + json.dumps(players) + "\n");
-
             sortedPlayers = sorted(players, key=lambda i: i['value'], reverse=True)
 
-            #print("Sorted: ")
-            #print("\n".join(map(str, sortedPlayers)))
-
-            botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERS\n"
+            #botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERS\n"
             count = 1
 
-            #playersPerColumn = 25
             playersPerColumn = math.ceil((len(sortedPlayers) - 3) / 2)
             if limit > 0 and limit < len(sortedPlayers):
               playersPerColumn = math.ceil((limit - 3) / 2)
             if playersPerColumn > 50:
               playersPerColumn = 50
 
-            #await self.bot.say('DEATH LEADERBOARD TEST')
             for player in sortedPlayers:
-                #await self.bot.say(player['name'] + ": " + str(player['deaths']))
                 value = ''
                 if isinstance(player['value'], float):
                     value = '{0:.3g}'.format(player['value'])
                 else:
                     value = '{:,}'.format(player['value'])
 
-                botMessage += str(count) + ". " + player['name'] + ": " + value + "\n"
+                #botMessage += str(count) + ". " + player['name'] + ": " + value + "\n"
                 # avatar images
                 if count < 4:
                     placedImage = await create_placed_image(self, ctx, player, scope, stat, count, value)
@@ -327,10 +313,9 @@ class ExmBoard:
                 if limit > 0 and count > limit:
                     break
 
-            botMessage += "```"
+            #botMessage += "```"
             #await self.bot.say(botMessage)
 
-            #bgImage.putalpha(txt)
             with io.BytesIO() as out:
                 cH = bigH
                 croppedH = (700 + (playersPerColumn * 50))
