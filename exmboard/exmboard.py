@@ -349,11 +349,15 @@ async def update_player_data():
 
 async def create_placed_image(self, ctx, player, scope, stat, place, value):
     fillColor = "#b08d57" # bronze
+    filename = 'bronze.png'
     if place == 2:
         fillColor = "#C0C0C0" # silver
+        filename = 'silver.png'
     elif place == 1:
         fillColor = "#D4AF37" # gold
-    playerImage = Image.new('RGB', (500, 500), fillColor)
+        filename = 'gold.png'
+    #playerImage = Image.new('RGB', (500, 500), fillColor)
+    playerImage = Image.open(path + '/' + filename).convert('RGB')
     avatar = urllib.urlopen(player['avatarUrl'])
     avatarImageFile = io.BytesIO(avatar.read())                
     avatarImage = Image.open(avatarImageFile).convert('RGB').resize((200, 200), Image.ANTIALIAS)
@@ -420,15 +424,6 @@ async def fetch_stats(self, ctx, playername, scope, stat):
             }
             
             return {'name': playername, 'avatarUrl': jsonObj['avatarUrl'], 'value': jsonObj['data']['classes'][classIndex[scope]][stat]['value']}
-        #return await self.bot.say(playername + ": " + str(jsonObj['data']['stats']['deaths']['value']))
-
-
-#async def fetch_image(self, ctx, duser, urlen, user, platform):
-#    async with aiohttp.get(urlen) as response:
-#        if response.headers['Content-Type'] == "image/png":
-#            return await self.bot.send_file(ctx.message.channel, io.BytesIO(await response.read()), filename=user + '.png')
-#        else:
-#            return await self.bot.say("Sorry " + duser.mention + ", could not find the player `"+ user + "`")
 
 def setup(bot):
     pathlib.Path(path).mkdir(exist_ok=True, parents=True)
