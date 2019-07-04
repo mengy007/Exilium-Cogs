@@ -210,7 +210,7 @@ class ExmBoard:
         if scope == 'all' and stat not in validAllStats:
             return await self.bot.say("`Supported stats are " + str(validAllStats) + "`")
         
-        if scope in validScopes and stat not in validClassStats:
+        if scope in validScopes and scope not in ['all', 'firestorm'] and stat not in validClassStats:
             return await self.bot.say("`Supported class stats are " + str(validClassStats) + "`")
 
         if scope == 'firestorm' and stat not in validFirestormStats:
