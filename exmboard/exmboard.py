@@ -121,9 +121,9 @@ class ExmBoard:
                 await update_player_data()
                 return await self.bot.say('Done updating player data!')
 
-            elif response.status == 400:
+            elif response.status == 200 and jsonObj['status'] == 'Private':
                 return await self.bot.say('Player chose to not share data. :(')
-                
+
             else:
                 return await self.bot.say('Player not found in Origin')
         
