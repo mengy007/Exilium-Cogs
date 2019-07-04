@@ -120,7 +120,10 @@ class ExmBoard:
                 await self.bot.say('Updating player data. This may take a few minutes')
                 await update_player_data()
                 return await self.bot.say('Done updating player data!')
-            
+
+            elif response.status == 400:
+                return await self.bot.say('Player chose to not share data. :(')
+                
             else:
                 return await self.bot.say('Player not found in Origin')
         
