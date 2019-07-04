@@ -69,7 +69,7 @@ class ExmBoard:
         server = ctx.message.server
         self.init_server(server)
 
-        if self.settings[server.id]['recruits'][playername]:
+        if playername in self.settings[server.id]['recruits'].keys():
           self.settings[server.id]['recruits'][playername] += 1
         else:
           self.settings[server.id]['recruits'][playername] = 1        
@@ -87,7 +87,7 @@ class ExmBoard:
         server = ctx.message.server
         self.init_server(server)
 
-        if self.settings[server.id]['recruits'][playername]:
+        if playername in self.settings[server.id]['recruits'].keys():
           if self.settings[server.id]['recruits'][playername] == 0:
             return await self.bot.say(playername + ' currently has 0 recruits!')
           else:
