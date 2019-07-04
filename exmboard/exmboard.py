@@ -215,8 +215,11 @@ class ExmBoard:
 
             botMessage = "```css\n[EXM] " + scope.upper() + " " + stat.upper() + " LEADERS\n"
             count = 1
+
             #playersPerColumn = 25
             playersPerColumn = math.ceil((len(sortedPlayers) - 3) / 2)
+            if limit < len(sortedPlayers):
+              playersPerColumn = math.ceil((limit - 3) / 2)
             if playersPerColumn > 25:
               playersPerColumn = 25
 
