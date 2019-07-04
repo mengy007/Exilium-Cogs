@@ -204,8 +204,8 @@ class ExmBoard:
         if channel.id not in self.settings[server.id]['whitelist']:
             return
 
-        if scope not in validScopes or scope != 'all':
-            return await self.bot.say("`Supported stat scopes are " + str(validScopes) + "`")
+        if scope not in validScopes and scope != 'all':
+            return await self.bot.say("`Supported stat scopes are 'all' or " + str(validScopes) + "`")
 
         if scope == 'all' and stat not in validAllStats:
             return await self.bot.say("`Supported stats are " + str(validAllStats) + "`")
