@@ -284,7 +284,11 @@ class ExmBoard:
 
             #bgImage.putalpha(txt)
             with io.BytesIO() as out:
-                cropped = bgImage.crop((0, 0, bigW, (700 + (playersPerColumn * 50))))
+                cH = bigH
+                croppedH = (700 + (playersPerColumn * 50))
+                if croppedH < bigH:
+                  cH = croppedH
+                cropped = bgImage.crop((0, 0, bigW, cH))
                 cropped.save(out, 'PNG')
                 await self.bot.send_file(ctx.message.channel, io.BytesIO(out.getvalue()), filename='exmboard.png')
 
