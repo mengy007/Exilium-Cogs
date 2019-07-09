@@ -289,6 +289,7 @@ class ExmBoard:
                     avatarCrop = placedImage.crop((0, 0, pW, pH))
                     bgImage.paste(avatarCrop, (pX, pY))
                 else:
+                    print('Player: ' + player['name'])
                     print('Avatar URL: ' + player['avatarUrl'])
                     avatar = urllib.urlopen(player['avatarUrl'])
                     avatarImageFile = io.BytesIO(avatar.read())                
