@@ -294,7 +294,7 @@ class ExmBoard:
                     avatar = ''
                     try:
                       avatar = urllib.urlopen(player['avatarUrl'])
-                    except expression as identifier:
+                    except Exception as e:
                       avatar = Image.new('RGB', (50, 50), '#000000')
                     avatarImageFile = io.BytesIO(avatar.read())                
                     avatarImage = Image.open(avatarImageFile).convert('RGB').resize((50, 50), Image.ANTIALIAS)
