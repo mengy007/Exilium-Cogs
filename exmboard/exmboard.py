@@ -366,7 +366,15 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
         filename = 'gold.png'
     #playerImage = Image.new('RGB', (500, 500), fillColor)
     playerImage = Image.open(path + '/' + filename).convert('RGB')
-    avatar = urllib.urlopen(player['avatarUrl'])
+
+    avatar = ''
+    try:
+      avatar = urllib.urlopen(player['avatarUrl'])
+    except Exception as e:                      
+      avatar = Image.new('RGB', (50, 50), '#000000')
+      print('Blank avatar created for ' + player['name'])
+      continue
+
     avatarImageFile = io.BytesIO(avatar.read())                
     avatarImage = Image.open(avatarImageFile).convert('RGB').resize((200, 200), Image.ANTIALIAS)
     avatarCrop = avatarImage.crop((0, 0, 200, 200))
