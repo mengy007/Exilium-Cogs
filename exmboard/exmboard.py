@@ -297,7 +297,7 @@ class ExmBoard:
                     except Exception as e:                      
                       avatar = Image.new('RGB', (50, 50), '#000000')
                       print('Blank avatar created for ' + player['name'])
-                      continue
+                      
                     avatarImageFile = io.BytesIO(avatar.read())                
                     avatarImage = Image.open(avatarImageFile).convert('RGB').resize((50, 50), Image.ANTIALIAS)
                     avatarCrop = avatarImage.crop((0, 0, 50, 50))
