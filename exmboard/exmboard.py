@@ -291,15 +291,16 @@ class ExmBoard:
                 else:
                     #print('Player: ' + player['name'])
                     #print('Avatar URL: ' + player['avatarUrl'])
-                    avatar = ''
+                    avatarImage = ''
                     try:
                       avatar = urllib.urlopen(player['avatarUrl'])
+                      avatarImageFile = io.BytesIO(avatar.read())                
+                      avatarImage = Image.open(avatarImageFile).convert('RGB').resize((50, 50), Image.ANTIALIAS)
+
                     except Exception as e:                      
-                      avatar = Image.new('RGB', (50, 50), '#000000')
+                      avatarImage = Image.new('RGB', (50, 50), '#000000')
                       print('Blank avatar created for ' + player['name'])
                       
-                    avatarImageFile = io.BytesIO(avatar.read())                
-                    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((50, 50), Image.ANTIALIAS)
                     avatarCrop = avatarImage.crop((0, 0, 50, 50))
                     textX = 110
                     textY = (450 + (count * 50))
@@ -367,15 +368,16 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     #playerImage = Image.new('RGB', (500, 500), fillColor)
     playerImage = Image.open(path + '/' + filename).convert('RGB')
 
-    avatar = ''
+    avatarImage = ''
     try:
       avatar = urllib.urlopen(player['avatarUrl'])
+      avatarImageFile = io.BytesIO(avatar.read())                
+      avatarImage = Image.open(avatarImageFile).convert('RGB').resize((200, 200), Image.ANTIALIAS)
     except Exception as e:                      
-      avatar = Image.new('RGB', (50, 50), '#000000')
-      print('Blank avatar created for ' + player['name'])      
-
-    avatarImageFile = io.BytesIO(avatar.read())                
-    avatarImage = Image.open(avatarImageFile).convert('RGB').resize((200, 200), Image.ANTIALIAS)
+      avatarImage = Image.new('RGB', (200, 200), '#000000')
+      print('Blank avatar created for ' + player['name'])
+      print('Error: ' + str(e))
+    
     avatarCrop = avatarImage.crop((0, 0, 200, 200))
     playerImage.paste(avatarCrop, (150, 75))
     d = ImageDraw.Draw(playerImage)
