@@ -397,20 +397,29 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
     return playerImage
 
 async def fetch_local_stats(self, ctx, player, scope, stat):
+    name = '<Unknown>'
+    avatarUrl = ''
+    value = 0
+
+
+    if player['data'] and player['data']['account'] and player['data']['account']['playerNameNormalized']:
+        name = player['data']['account']['playerNameNormalized']
+
+    if player['avatarUrl']:
+        avatarUrl = player['avatarUrl']
+
     if scope == 'all':
-        value = 0
-        if player['data']['stats'] and player['data']['stats'][stat] and player['data']['stats'][stat]['value']:
+        if player['data'] and player['data']['stats'] and player['data']['stats'][stat] and player['data']['stats'][stat]['value']:
             value = player['data']['stats'][stat]['value']
 
-        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': value}
+        return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
         
     elif scope == 'firestorm':
-        value = 0
-        if player['data']['statsFirestorm'] and player['data']['statsFirestorm'][stat] and player['data']['statsFirestorm'][stat]['value']:
+        if player['data'] and player['data']['statsFirestorm'] and player['data']['statsFirestorm'][stat] and player['data']['statsFirestorm'][stat]['value']:
             value = player['data']['statsFirestorm'][stat]['value']
 
-        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': value}
-        
+        return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
+
     else:
         classIndex = {
             'assault': 0,
@@ -420,8 +429,10 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
             'support': 4,
             'tanker': 5
         }
+        if player['data'] and player['data']['classes'] and player['data']['classes'][classIndex[scope]] and player['data']['classes'][classIndex[scope]][stat] and player['data']['classes'][classIndex[scope]][stat]['value']:
+            value = player['data']['classes'][classIndex[scope]][stat]['value']
         
-        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
+        return {'name': name, 'avatarUrl': avatarUrl, 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
  
 
 async def fetch_stats(self, ctx, playername, scope, stat):
