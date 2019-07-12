@@ -402,8 +402,10 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
     value = 0
 
 
-    if player['data'] and player['data']['account'] and player['data']['account']['playerNameNormalized']:
-        name = player['data']['account']['playerNameNormalized']
+    #if player['data'] and player['data']['account'] and player['data']['account']['playerNameNormalized']:
+    #    name = player['data']['account']['playerNameNormalized']
+    if player['data'] and player['data']['account'] and player['data']['account']['playerName']:
+        name = player['data'] and player['data']['account'] and player['data']['account']['playerName']
 
     if player['avatarUrl']:
         avatarUrl = player['avatarUrl']
