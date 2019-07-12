@@ -398,13 +398,19 @@ async def create_placed_image(self, ctx, player, scope, stat, place, value):
 
 async def fetch_local_stats(self, ctx, player, scope, stat):
     if scope == 'all':
-        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': player['data']['stats'][stat]['value']}
+        value = 0
+        if player['data']['stats'] and player['data']['stats'][stat] and player['data']['stats'][stat]['value']:
+            value = player['data']['stats'][stat]['value']
+
+        return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': value}
+        
     elif scope == 'firestorm':
         value = 0
         if player['data']['statsFirestorm'] and player['data']['statsFirestorm'][stat] and player['data']['statsFirestorm'][stat]['value']:
             value = player['data']['statsFirestorm'][stat]['value']
 
         return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': value}
+        
     else:
         classIndex = {
             'assault': 0,
