@@ -406,6 +406,9 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
     #    name = player['data']['account']['playerNameNormalized']
     if player['data'] and player['data']['account'] and player['data']['account']['playerName']:
         name = player['data'] and player['data']['account'] and player['data']['account']['playerName']
+    else:
+        print('Something is wrong with the following player:')
+        print(str(player))
 
     if player['avatarUrl']:
         avatarUrl = player['avatarUrl']
