@@ -22,6 +22,13 @@ fnt = ImageFont.truetype(path + '/futura.ttf', size=50)
 
 #bot = commands.Bot(command_prefix=commands.when_mentioned, description="Battlefield Stats Tracker")
 
+validScopes = ['assault', 'recon', 'support', 'medic', 'tanker', 'pilot', 'firestorm']
+validFirestormStats = ['squadLosses', 'safes', 'killsPerMinute', 'squadWins', 'roadKills', 'vehicleBreakouts', 'vehiclesDestroyed', 'matchesPlayed', 'tanks', 'capturePoints', 'healing', 'kills', 'supplyDrops', 'killsPerMatch', 'headshots', 'timePlayed', 'vehicleWeaponKills', 'soloLosses', 'downs', 'soloWinPercentage', 'deaths', 'teamKills', 'kdRatio', 'soloWins', 'killsMelee', 'revives', 'squadWinPercentage']
+validAllStats = ['saviorKills', 'scoreCombat', 'scoreAssault', 'wlPercentage', 'scoreGeneral', 'rank', 'scoreAward', 'headshots', 'shotsAccuracy', 'assistsAsKills', 'longestHeadshot', 'dogtagsTaken', 'draws', 'scoreDefensive', 'scoreSquad', 'avengerKills', 'losses', 'revivesRecieved', 'rounds', 'killStreak', 'deaths', 'damage', 'scoreLand', 'assists', 'scoreRecon', 'squadWipes', 'timePlayed', 'repairs', 'scoreAir', 'scoreSupport', 'heals', 'resupplies', 'scoreBonus', 'squadSpawns', 'damagePerMinute', 'rankScore', 'scoreRound', 'killsPerMinute', 'ordersCompleted', 'shotsHit', 'aceSquad', 'scorePerMinute', 'scoreTransports', 'shotsTaken', 'scoreObjective', 'scoreMedic', 'suppressionAssists', 'roundsPlayed', 'killsAggregated', 'kills', 'revives', 'scoreTanks', 'wins', 'kdRatio']
+validClassStats = ['deaths', 'kills', 'kdRatio', 'shotsFired', 'shotsHit', 'score', 'killsPerMinute', 'scorePerMinute', 'timePlayed', 'shotsAccuracy']
+validGameModes = ['airborne', 'breakthrough', 'conquest', 'squadConquest', 'domination', 'finalStand', 'tdm', 'frontlines']
+validGameModeStats = ['wins', 'losses', 'wlPercentage', 'score', 'flagDefends', 'flagCapture', 'artilleryDefenseKills', 'bombsPlaced' ,'bombsDefused', 'messagesDelivered', 'carriersKills', 'carriersReleased', 'carriersReleased', 'messagesWritten']
+
 class ExmBoard:
 
     __author__ = "mengy007 (mengy#1441)"
@@ -194,27 +201,31 @@ class ExmBoard:
         server = ctx.message.server
         channel = ctx.message.channel
         bgImage = Image.open(path + '/bg.png').convert('RGB')
-        validScopes = ['assault', 'recon', 'support', 'medic', 'tanker', 'pilot', 'firestorm']
-        validFirestormStats = ['squadLosses', 'safes', 'killsPerMinute', 'squadWins', 'roadKills', 'vehicleBreakouts', 'vehiclesDestroyed', 'matchesPlayed', 'tanks', 'capturePoints', 'healing', 'kills', 'supplyDrops', 'killsPerMatch', 'headshots', 'timePlayed', 'vehicleWeaponKills', 'soloLosses', 'downs', 'soloWinPercentage', 'deaths', 'teamKills', 'kdRatio', 'soloWins', 'killsMelee', 'revives', 'squadWinPercentage']
-        validAllStats = ['saviorKills', 'scoreCombat', 'scoreAssault', 'wlPercentage', 'scoreGeneral', 'rank', 'scoreAward', 'headshots', 'shotsAccuracy', 'assistsAsKills', 'longestHeadshot', 'dogtagsTaken', 'draws', 'scoreDefensive', 'scoreSquad', 'avengerKills', 'losses', 'revivesRecieved', 'rounds', 'killStreak', 'deaths', 'damage', 'scoreLand', 'assists', 'scoreRecon', 'squadWipes', 'timePlayed', 'repairs', 'scoreAir', 'scoreSupport', 'heals', 'resupplies', 'scoreBonus', 'squadSpawns', 'damagePerMinute', 'rankScore', 'scoreRound', 'killsPerMinute', 'ordersCompleted', 'shotsHit', 'aceSquad', 'scorePerMinute', 'scoreTransports', 'shotsTaken', 'scoreObjective', 'scoreMedic', 'suppressionAssists', 'roundsPlayed', 'killsAggregated', 'kills', 'revives', 'scoreTanks', 'wins', 'kdRatio']
-        validClassStats = ['deaths', 'kills', 'kdRatio', 'shotsFired', 'shotsHit', 'score', 'killsPerMinute', 'scorePerMinute', 'timePlayed', 'shotsAccuracy']
-
+        
         if server.id not in self.settings:
             return
         if channel.id not in self.settings[server.id]['whitelist']:
             return
 
-        if scope not in validScopes and scope != 'all':
-            return await self.bot.say("`Supported stat scopes are 'all' or " + str(validScopes) + "`")
+        # Check scopes
+        if scope not in validScopes and scope not in validGameModes and scope != 'firestorm' and scope != 'all':
+            return await self.bot.say("`Supported stat scopes are 'all', 'fireStorm' or " + str(validScopes) + " or " + str(validGameModes) + "`")
 
+        # Check 'all' stats
         if scope == 'all' and stat not in validAllStats:
             return await self.bot.say("`Supported stats are " + str(validAllStats) + "`")
-        
+
+        # Check 'class' stats      
         if scope in validScopes and scope not in ['all', 'firestorm'] and stat not in validClassStats:
             return await self.bot.say("`Supported class stats are " + str(validClassStats) + "`")
 
+        # Check 'firestorm' stats
         if scope == 'firestorm' and stat not in validFirestormStats:
             return await self.bot.say("`Supported firestorm stats are " + str(validFirestormStats) + "`")
+
+        # Check 'gamemode' stats
+        if scope in validGameModes and stat not in validGameModeStats:
+            return await self.bot.say("`Supported gamemode stats are " + str(validGameModeStats) + "`")
 
         await self.bot.send_typing(channel)
 
@@ -405,6 +416,19 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
             value = player['data']['statsFirestorm'][stat]['value']
 
         return {'name': player['data']['account']['playerNameNormalized'], 'avatarUrl': player['avatarUrl'], 'value': value}
+    elif scope in validGameModes:
+        gameModeIndex = {
+            'airborne': 0,
+            'breakthrough': 1,
+            'conquest': 2,
+            'squadConquest': 3,
+            'domination': 4,
+            'finalStand': 5,
+            'tdm': 6,
+            'frontlines': 7
+        }
+
+        return {'name': 'name'}
     else:
         classIndex = {
             'assault': 0,
