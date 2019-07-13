@@ -448,9 +448,9 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
             'tdm': 6,
             'frontlines': 7
         }
-        if player['data'] and player['data']['gamemodes'] and player['data']['gamemodes'][gameModeIndex[scope]] and player['data']['gamemodes'][gameModeIndex[scope]]['value']:
-            value = player['data']['gamemodes'][gameModeIndex[scope]]['value']
-            
+        if player['data'] and player['data']['gamemodes'] and player['data']['gamemodes'][gameModeIndex[scope]] and player['data']['gamemodes'][gameModeIndex[scope]][stat] and player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']:
+            value = player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']
+
         return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
 
     else:
