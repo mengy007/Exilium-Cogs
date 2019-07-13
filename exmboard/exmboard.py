@@ -247,7 +247,8 @@ class ExmBoard:
 
             players = []
             for player in self.settings[server.id]['playerData']:
-                players.append(await fetch_local_stats(self, ctx, player, scope, stat))
+                if (player['data'] and player['data'] != None):
+                    players.append(await fetch_local_stats(self, ctx, player, scope, stat))
 
             sortedPlayers = sorted(players, key=lambda i: i['value'], reverse=True)
 
