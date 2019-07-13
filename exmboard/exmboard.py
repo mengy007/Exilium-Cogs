@@ -27,7 +27,7 @@ validFirestormStats = ['squadLosses', 'safes', 'killsPerMinute', 'squadWins', 'r
 validAllStats = ['saviorKills', 'scoreCombat', 'scoreAssault', 'wlPercentage', 'scoreGeneral', 'rank', 'scoreAward', 'headshots', 'shotsAccuracy', 'assistsAsKills', 'longestHeadshot', 'dogtagsTaken', 'draws', 'scoreDefensive', 'scoreSquad', 'avengerKills', 'losses', 'revivesRecieved', 'rounds', 'killStreak', 'deaths', 'damage', 'scoreLand', 'assists', 'scoreRecon', 'squadWipes', 'timePlayed', 'repairs', 'scoreAir', 'scoreSupport', 'heals', 'resupplies', 'scoreBonus', 'squadSpawns', 'damagePerMinute', 'rankScore', 'scoreRound', 'killsPerMinute', 'ordersCompleted', 'shotsHit', 'aceSquad', 'scorePerMinute', 'scoreTransports', 'shotsTaken', 'scoreObjective', 'scoreMedic', 'suppressionAssists', 'roundsPlayed', 'killsAggregated', 'kills', 'revives', 'scoreTanks', 'wins', 'kdRatio']
 validClassStats = ['deaths', 'kills', 'kdRatio', 'shotsFired', 'shotsHit', 'score', 'killsPerMinute', 'scorePerMinute', 'timePlayed', 'shotsAccuracy']
 validGameModes = ['airborne', 'breakthrough', 'conquest', 'squadConquest', 'domination', 'finalStand', 'tdm', 'frontlines']
-validGameModeStats = ['wins', 'losses', 'wlPercentage', 'score', 'flagDefends', 'flagCapture', 'artilleryDefenseKills', 'bombsPlaced' ,'bombsDefused', 'messagesDelivered', 'carriersKills', 'carriersReleased', 'carriersReleased', 'messagesWritten']
+validGameModeStats = ['wins', 'losses', 'wlPercentage', 'score', 'flagDefends', 'flagCaptures', 'artilleryDefenseKills', 'bombsPlaced' ,'bombsDefused', 'messagesDelivered', 'carriersKills', 'carriersReleased', 'carriersReleased', 'messagesWritten']
 
 class ExmBoard:
 
