@@ -275,7 +275,10 @@ class ExmBoard:
             for player in sortedPlayers:
                 value = ''
                 if isinstance(player['value'], float):
-                    value = '{0:.3g}'.format(player['value'])
+                    if stat == 'longestHeadshot':
+                        value = '{0:g}'.format(player['value'])
+                    else:
+                        value = '{0:.3g}'.format(player['value'])
                 else:
                     value = '{:,}'.format(player['value'])
 
@@ -328,7 +331,7 @@ class ExmBoard:
                     if count > playersPerColumn + 3:
                         valueX = int(bigW - w - 50)
 
-                    d.text((valueX, textY), str(value), font=fnt, fill="rgb(255,255,255)")
+                    d.text((valueX, textY), value, font=fnt, fill="rgb(255,255,255)")
 
                 count += 1
 
