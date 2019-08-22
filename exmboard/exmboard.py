@@ -328,7 +328,7 @@ class ExmBoard:
                     if count > playersPerColumn + 3:
                         valueX = int(bigW - w - 50)
 
-                    d.text((valueX, textY), value, font=fnt, fill="rgb(255,255,255)")
+                    d.text((valueX, textY), str(value), font=fnt, fill="rgb(255,255,255)")
 
                 count += 1
 
