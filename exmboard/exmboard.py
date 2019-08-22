@@ -275,10 +275,7 @@ class ExmBoard:
             for player in sortedPlayers:
                 value = ''
                 if isinstance(player['value'], float):
-                    if stat == 'longestHeadshot':
-                        value = '{0:g}'.format(player['value'])
-                    else:
-                        value = '{0:.3g}'.format(player['value'])
+                    value = '{0:.4g}'.format(player['value'])
                 else:
                     value = '{:,}'.format(player['value'])
 
