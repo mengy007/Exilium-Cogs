@@ -472,30 +472,6 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
         
         return {'name': name, 'avatarUrl': avatarUrl, 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
 
-async def fetch_stats(self, ctx, playername, scope, stat):
-    url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
-    
-    print("URL: " + url)
-
-    async with aiohttp.get(url) as response:
-        jsonObj = await response.json()
-        #print("JSON: " + json.dumps(jsonObj));
-        if scope == 'all':
-            return {'name': playername, 'avatarUrl': jsonObj['avatarUrl'], 'value': jsonObj['data']['stats'][stat]['value']}
-        elif scope == 'firestorm':
-            return {'name': playername, 'avatarUrl': jsonObj['avatarUrl'], 'value': jsonObj['data']['statsFirestorm'][stat]['value']}
-        else:
-            classIndex = {
-              'assault': 0,
-              'medic': 1,
-              'pilot': 2,
-              'recon': 3,
-              'support': 4,
-              'tanker': 5
-            }
-            
-            return {'name': playername, 'avatarUrl': jsonObj['avatarUrl'], 'value': jsonObj['data']['classes'][classIndex[scope]][stat]['value']}
-
 def setup(bot):
     pathlib.Path(path).mkdir(exist_ok=True, parents=True)
     bot.add_cog(ExmBoard(bot))
