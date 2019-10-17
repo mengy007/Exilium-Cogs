@@ -14,11 +14,16 @@ playerData = []
 
 ## functions
 async def fetch_stats(playername):
-  url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
+  # url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
+  url = "https://battlefieldtracker.com/bfv/profile/origin/" + playername.replace(" ", "%20") + "/overview"
   print(" - URL: " + url + "\n")
   async with aiohttp.ClientSession() as session:
     async with session.get(url) as response:
-      return await response.json()
+      startPosSearchString = "window.__INITIAL_STATE__="
+      startPos = response.find(startPosSearchString) + len(startPosSearchString)
+      endPos = response.find(";", startPos)
+      print("JSON: " + response[startPos:endPos])
+      # return await response.json()
 
 ## main
 async def main():
@@ -29,9 +34,9 @@ async def main():
         print("Player: " + player + "\n")
         playerData.append(await fetch_stats(player))
 
-      settings[server]['playerData'] = playerData
+      #settings[server]['playerData'] = playerData
 
-    dataIO.save_json(path + '/settings.json', settings)
+    #dataIO.save_json(path + '/settings.json', settings)
 
   except Exception as e:
     print('ERROR: ' + e)
