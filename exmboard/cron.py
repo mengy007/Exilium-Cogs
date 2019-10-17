@@ -14,19 +14,16 @@ playerData = []
 
 ## functions
 async def fetch_stats(playername):
-  # url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
   url = "https://battlefieldtracker.com/bfv/profile/origin/" + playername.replace(" ", "%20") + "/overview"
   print(" - URL: " + url + "\n")
   async with aiohttp.ClientSession() as session:
     async with session.get(url) as response:
       responseString = await response.text()
-      #print("RESPONSE: " + responseString)
       startPosSearchString = "window.__INITIAL_STATE__="
       startPos = responseString.find(startPosSearchString) + len(startPosSearchString)
       endPos = responseString.find(";", startPos)
-      #print("JSON: " + responseString[startPos:endPos])
-      # return await response.json()
-      return await json.load(responseString[startPos:endPos])
+      responseJson = json.loads(responseString[startPos:endPos])
+      return responseJson["stats-v2"]["standardProfiles"]["bfv|origin|" + playername.lower()]
 
 ## main
 async def main():
