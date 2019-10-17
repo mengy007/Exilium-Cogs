@@ -19,11 +19,14 @@ async def fetch_stats(playername):
   print(" - URL: " + url + "\n")
   async with aiohttp.ClientSession() as session:
     async with session.get(url) as response:
+      responseString = await response.text()
+      #print("RESPONSE: " + responseString)
       startPosSearchString = "window.__INITIAL_STATE__="
-      startPos = response.find(startPosSearchString) + len(startPosSearchString)
-      endPos = response.find(";", startPos)
-      print("JSON: " + response[startPos:endPos])
+      startPos = responseString.find(startPosSearchString) + len(startPosSearchString)
+      endPos = responseString.find(";", startPos)
+      #print("JSON: " + responseString[startPos:endPos])
       # return await response.json()
+      return await json.load(responseString[startPos:endPos])
 
 ## main
 async def main():
@@ -34,9 +37,9 @@ async def main():
         print("Player: " + player + "\n")
         playerData.append(await fetch_stats(player))
 
-      #settings[server]['playerData'] = playerData
+      settings[server]['playerData'] = playerData
 
-    #dataIO.save_json(path + '/settings.json', settings)
+    dataIO.save_json(path + '/settings.json', settings)
 
   except Exception as e:
     print('ERROR: ' + e)
