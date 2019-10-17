@@ -417,13 +417,13 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
 
     #if player['data'] and player['data']['account'] and player['data']['account']['playerNameNormalized']:
     #    name = player['data']['account']['playerNameNormalized']
-    if player['platformInfo'] and player['platformInfo']['platformUserHandle']:
+    if player and player['platformInfo'] and player['platformInfo']['platformUserHandle']:
         name = player['platformInfo']['platformUserHandle']
     else:
         print('Something is wrong with the following player:')
         print(str(player))
 
-    if player["platformInfo"]['avatarUrl']:
+    if player['platformInfo']['avatarUrl']:
         avatarUrl = player["platformInfo"]['avatarUrl']
 
     if scope == 'all':
