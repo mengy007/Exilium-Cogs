@@ -427,8 +427,9 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
         avatarUrl = player["platformInfo"]['avatarUrl']
 
     if scope == 'all':
-        if player['segments'] and player['segments']['stats'] and player['segments']['stats'][stat] and player['segments']['stats'][stat]['value']:
-          value = player['segments']['stats'][stat]['value']
+        segment = 0
+        if player['segments'] and player['segments'][segment]['stats'] and player['segments'][segment]['stats'][stat] and player['segments'][segment]['stats'][stat]['value']:
+          value = player['segments'][segment]['stats'][stat]['value']
         else:
           value = 'N/A'
 
