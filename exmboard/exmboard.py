@@ -413,6 +413,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
     avatarUrl = ''
     value = 0
 
+    print('Stat: ' + stat)
 
     #if player['data'] and player['data']['account'] and player['data']['account']['playerNameNormalized']:
     #    name = player['data']['account']['playerNameNormalized']
@@ -427,7 +428,11 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
 
     if scope == 'all':
         if player['segments'] and player['segments']['stats'] and player['segments']['stats'][stat] and player['segments']['stats'][stat]['value']:
-            value = player['segments']['stats'][stat]['value']
+          value = player['segments']['stats'][stat]['value']
+        else:
+          value = 'N/A'
+
+        print('Value: ' + value)
 
         return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
         
