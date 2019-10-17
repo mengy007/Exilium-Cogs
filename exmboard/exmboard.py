@@ -422,8 +422,8 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
         print('Something is wrong with the following player:')
         print(str(player))
 
-    if player['avatarUrl']:
-        avatarUrl = player['avatarUrl']
+    if player["platformInfo"]['avatarUrl']:
+        avatarUrl = player["platformInfo"]['avatarUrl']
 
     if scope == 'all':
         if player["segments"] and player['segments']['stats'] and player['segments']['stats'][stat] and player['segments']['stats'][stat]['value']:
