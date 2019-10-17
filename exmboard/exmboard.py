@@ -426,7 +426,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
         avatarUrl = player["platformInfo"]['avatarUrl']
 
     if scope == 'all':
-        if player["segments"] and player['segments']['stats'] and player['segments']['stats'][stat] and player['segments']['stats'][stat]['value']:
+        if player['segments'] and player['segments']['stats'] and player['segments']['stats'][stat] and player['segments']['stats'][stat]['value']:
             value = player['segments']['stats'][stat]['value']
 
         return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
