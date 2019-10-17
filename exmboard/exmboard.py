@@ -433,7 +433,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
         else:
           value = 'N/A'
 
-        print('Value: ' + value)
+        print('Value: ' + str(value))
 
         return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
         
