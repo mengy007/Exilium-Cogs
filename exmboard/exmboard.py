@@ -432,7 +432,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
         if 'segments' in player and 'stats' in player['segments'][segment] and stat in player['segments'][segment]['stats'] and 'value' in player['segments'][segment]['stats'][stat]:
           value = player['segments'][segment]['stats'][stat]['value']
         else:
-          value = 'N/A'
+          value = 0
 
         print('Value: ' + str(value))
 
