@@ -118,22 +118,22 @@ class ExmBoard:
         url = "https://battlefieldtracker.com/bfv/profile/origin/" + playername.replace(" ", "%20") + "/overview"
         
         async with aiohttp.get(url) as response:
-            jsonObj = await response.json()
-            if response.status == 200 and jsonObj['status'] == 'Success':
-                if playername in self.settings[server.id]['players']:
-                    return await self.bot.say('Player already on leaderboard')
-                self.settings[server.id]['players'].append(playername)
-                self.save_json()                
-                await self.bot.say('Player added to leaderboard')
-                await self.bot.say('Updating player data. This may take a few minutes')
-                await update_player_data()
-                return await self.bot.say('Done updating player data!')
+          #jsonObj = await response.json()
+          if response.status == 200:
+            if playername in self.settings[server.id]['players']:
+              return await self.bot.say('Player already on leaderboard')
+            self.settings[server.id]['players'].append(playername)
+            self.save_json()                
+            await self.bot.say('Player added to leaderboard')
+            await self.bot.say('Updating player data. This may take a few minutes')
+            await update_player_data()
+            return await self.bot.say('Done updating player data!')
 
-            elif response.status == 200 and jsonObj['status'] == 'Private':
-                return await self.bot.say('Player chose to not share data. :(')
+        #elif response.status == 200 and jsonObj['status'] == 'Private':
+        #    return await self.bot.say('Player chose to not share data. :(')
 
-            else:
-                return await self.bot.say('Player not found in Origin')
+          else:
+            return await self.bot.say('Player not found in Origin')
         
 
     @_group.command(name='remove', pass_context=True, no_pm=True)
