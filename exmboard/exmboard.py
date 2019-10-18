@@ -456,6 +456,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
             'tdm': 7,
             'frontlines': 8
         }
+        segment = gameModeIndex[scope]
         #if player['data'] and player['data']['gamemodes'] and player['data']['gamemodes'][gameModeIndex[scope]] and player['data']['gamemodes'][gameModeIndex[scope]][stat] and player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']:
         if 'segments' in player and 'stats' in player['segments'][segment] and stat in player['segments'][segment]['stats'] and 'value' in player['segments'][segment]['stats'][stat]:
           #value = player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']
@@ -472,6 +473,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
             'support': 13,
             'tanker': 14
         }
+        segment = gameModeIndex[scope]
         #if player['data'] and player['data']['classes'] and player['data']['classes'][classIndex[scope]] and player['data']['classes'][classIndex[scope]][stat] and player['data']['classes'][classIndex[scope]][stat]['value']:
         if 'segments' in player and 'stats' in player['segments'][segment] and stat in player['segments'][segment]['stats'] and 'value' in player['segments'][segment]['stats'][stat]:
           #value = player['data']['classes'][classIndex[scope]][stat]['value']
