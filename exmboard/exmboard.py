@@ -437,10 +437,13 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
         return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
         
     elif scope == 'firestorm':
-        if player['data'] and player['data']['statsFirestorm'] and player['data']['statsFirestorm'][stat] and player['data']['statsFirestorm'][stat]['value']:
-            value = player['data']['statsFirestorm'][stat]['value']
+      segment = 15
+      #if player['data'] and player['data']['statsFirestorm'] and player['data']['statsFirestorm'][stat] and player['data']['statsFirestorm'][stat]['value']:
+      if 'segments' in player and 'stats' in player['segments'][segment] and stat in player['segments'][segment]['stats'] and 'value' in player['segments'][segment]['stats'][stat]:
+        #value = player['data']['statsFirestorm'][stat]['value']
+        value = player['segments'][segment]['stats'][stat]['value']
 
-        return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
+      return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
 
     elif scope in validGameModes:
         gameModeIndex = {
