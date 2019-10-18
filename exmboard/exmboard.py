@@ -447,31 +447,35 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
 
     elif scope in validGameModes:
         gameModeIndex = {
-            'airborne': 0,
-            'breakthrough': 1,
-            'conquest': 2,
-            'squadConquest': 3,
-            'domination': 4,
-            'finalStand': 5,
-            'tdm': 6,
-            'frontlines': 7
+            'airborne': 1,
+            'breakthrough': 2,
+            'conquest': 3,
+            'squadConquest': 4,
+            'domination': 5,
+            'finalStand': 6,
+            'tdm': 7,
+            'frontlines': 8
         }
-        if player['data'] and player['data']['gamemodes'] and player['data']['gamemodes'][gameModeIndex[scope]] and player['data']['gamemodes'][gameModeIndex[scope]][stat] and player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']:
-            value = player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']
+        #if player['data'] and player['data']['gamemodes'] and player['data']['gamemodes'][gameModeIndex[scope]] and player['data']['gamemodes'][gameModeIndex[scope]][stat] and player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']:
+        if 'segments' in player and 'stats' in player['segments'][segment] and stat in player['segments'][segment]['stats'] and 'value' in player['segments'][segment]['stats'][stat]:
+          #value = player['data']['gamemodes'][gameModeIndex[scope]][stat]['value']
+          value = player['segments'][segment]['stats'][stat]['value']
 
         return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
 
     else:
         classIndex = {
-            'assault': 0,
-            'medic': 1,
-            'pilot': 2,
-            'recon': 3,
-            'support': 4,
-            'tanker': 5
+            'assault': 9,
+            'medic': 10,
+            'pilot': 11,
+            'recon': 12,
+            'support': 13,
+            'tanker': 14
         }
-        if player['data'] and player['data']['classes'] and player['data']['classes'][classIndex[scope]] and player['data']['classes'][classIndex[scope]][stat] and player['data']['classes'][classIndex[scope]][stat]['value']:
-            value = player['data']['classes'][classIndex[scope]][stat]['value']
+        #if player['data'] and player['data']['classes'] and player['data']['classes'][classIndex[scope]] and player['data']['classes'][classIndex[scope]][stat] and player['data']['classes'][classIndex[scope]][stat]['value']:
+        if 'segments' in player and 'stats' in player['segments'][segment] and stat in player['segments'][segment]['stats'] and 'value' in player['segments'][segment]['stats'][stat]:
+          #value = player['data']['classes'][classIndex[scope]][stat]['value']
+          value = player['segments'][segment]['stats'][stat]['value']
         
         return {'name': name, 'avatarUrl': avatarUrl, 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
 
