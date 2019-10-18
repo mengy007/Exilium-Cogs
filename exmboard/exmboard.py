@@ -114,7 +114,8 @@ class ExmBoard:
         server = ctx.message.server
         self.init_server(server)
 
-        url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
+        #url = "https://api.battlefieldtracker.com/api/v1/bfv/profile/origin/" + playername.replace(" ", "%20")
+        url = "https://battlefieldtracker.com/bfv/profile/origin/" + playername.replace(" ", "%20") + "/overview"
         
         async with aiohttp.get(url) as response:
             jsonObj = await response.json()
