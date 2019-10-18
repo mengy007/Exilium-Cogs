@@ -479,7 +479,7 @@ async def fetch_local_stats(self, ctx, player, scope, stat):
           #value = player['data']['classes'][classIndex[scope]][stat]['value']
           value = player['segments'][segment]['stats'][stat]['value']
         
-        return {'name': name, 'avatarUrl': avatarUrl, 'value': player['data']['classes'][classIndex[scope]][stat]['value']}
+        return {'name': name, 'avatarUrl': avatarUrl, 'value': value}
 
 def setup(bot):
     pathlib.Path(path).mkdir(exist_ok=True, parents=True)
