@@ -107,7 +107,7 @@ class ExmBoard:
         return await self.bot.say(playername + ' currently has ' + str(self.settings[server.id]['recruits'][playername]) + ' recruits!')
 
     @_group.command(name='update', pass_context=True, no_pm=True)
-    async def update(self, ctx, playername):
+    async def update(self, ctx):
       """
       update player data
       """
@@ -136,10 +136,10 @@ class ExmBoard:
               return await self.bot.say('Player already on leaderboard')
             self.settings[server.id]['players'].append(playername)
             self.save_json()                
-            await self.bot.say('Player added to leaderboard')
+            return await self.bot.say('Player added to leaderboard')
             # await self.bot.say('Updating player data. This may take a few minutes')
             # await update_player_data()
-            return await self.bot.say('Done updating player data!')
+            # return await self.bot.say('Done updating player data!')
 
         #elif response.status == 200 and jsonObj['status'] == 'Private':
         #    return await self.bot.say('Player chose to not share data. :(')
@@ -160,7 +160,7 @@ class ExmBoard:
         if playername in self.settings[server.id]['players']:
             self.settings[server.id]['players'].remove(playername)
             self.save_json()
-            await self.bot.say('Player removed from leaderboard')            
+            return await self.bot.say('Player removed from leaderboard')            
             # await self.bot.say('Updating player data. This may take a few minutes')
             # await update_player_data()
             # return await self.bot.say('Done updating player data!')
