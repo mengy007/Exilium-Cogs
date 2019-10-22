@@ -215,7 +215,7 @@ class ExmBoard:
         channel = ctx.message.channel
         bgImage = Image.open(path + '/bg.png').convert('RGB')
         
-        if limit > 51
+        if limit > 51:
           limit = 51
 
         if server.id not in self.settings:
