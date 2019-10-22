@@ -161,9 +161,9 @@ class ExmBoard:
             self.settings[server.id]['players'].remove(playername)
             self.save_json()
             await self.bot.say('Player removed from leaderboard')            
-            await self.bot.say('Updating player data. This may take a few minutes')
-            await update_player_data()
-            return await self.bot.say('Done updating player data!')
+            # await self.bot.say('Updating player data. This may take a few minutes')
+            # await update_player_data()
+            # return await self.bot.say('Done updating player data!')
 
         await self.bot.say('Player not on leaderboard')
 
