@@ -32,7 +32,7 @@ validGameModeStats = ['wins', 'losses', 'wlPercentage', 'score', 'flagDefends', 
 class ExmBoard:
 
     __author__ = "mengy007 (mengy#1441)"
-    __version__ = "1.0"
+    __version__ = "2.0"
 
     def __init__(self, bot):
         self.bot = bot
@@ -106,6 +106,18 @@ class ExmBoard:
         await self.bot.say('Recruit removed from ' + playername)
         return await self.bot.say(playername + ' currently has ' + str(self.settings[server.id]['recruits'][playername]) + ' recruits!')
 
+    @_group.command(name='update', pass_context=True, no_pm=True)
+    async def update(self, ctx, playername):
+      """
+      update player data
+      """
+      server = ctx.message.server
+      self.init_server(server)
+
+      await self.bot.say('Updating player data. This may take a while')
+      await update_player_data()
+      return await self.bot.say('Done updating player data!')
+
     @_group.command(name='add', pass_context=True, no_pm=True)
     async def add(self, ctx, playername):
         """
@@ -125,8 +137,8 @@ class ExmBoard:
             self.settings[server.id]['players'].append(playername)
             self.save_json()                
             await self.bot.say('Player added to leaderboard')
-            await self.bot.say('Updating player data. This may take a few minutes')
-            await update_player_data()
+            # await self.bot.say('Updating player data. This may take a few minutes')
+            # await update_player_data()
             return await self.bot.say('Done updating player data!')
 
         #elif response.status == 200 and jsonObj['status'] == 'Private':
