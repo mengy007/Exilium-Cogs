@@ -208,13 +208,16 @@ class ExmBoard:
         await self.bot.say('Settings reset')
 
     @commands.command(pass_context=True, no_pm=True, name="exmboard")
-    async def exmboard(self, ctx, scope, stat, limit = 0):
+    async def exmboard(self, ctx, scope, stat, limit = 51):
         """Leaderboard Stats"""
 
         server = ctx.message.server
         channel = ctx.message.channel
         bgImage = Image.open(path + '/bg.png').convert('RGB')
         
+        if limit > 51
+          limit = 51
+
         if server.id not in self.settings:
             return
         if channel.id not in self.settings[server.id]['whitelist']:
