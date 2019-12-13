@@ -168,7 +168,7 @@ class ExmBoard:
         await self.bot.say('Player not on leaderboard')
 
     @_group.command(name='list', pass_context=True, no_pm=True)
-    async def remove(self, ctx):
+    async def list(self, ctx):
         """
         list players on leaderboard
         """
