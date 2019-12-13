@@ -167,6 +167,22 @@ class ExmBoard:
 
         await self.bot.say('Player not on leaderboard')
 
+    @_group.command(name='list', pass_context=True, no_pm=True)
+    async def remove(self, ctx):
+        """
+        list players on leaderboard
+        """
+
+        server = ctx.message.server
+        self.init_server(server)
+
+        playersMessage = ""
+        for player in self.settings[server.id]['playerData']:
+          playersMessage += player['platformInfo']['platformUserHandle'] + "\n"
+
+        return await self.bot.say("Players currently on the Leaderboard:\n" + playersMessage)
+
+
     @_group.command(name='whitelist', pass_context=True, no_pm=True)
     async def whitelist(self, ctx, channel: discord.Channel):
         """
