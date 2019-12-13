@@ -178,7 +178,11 @@ class ExmBoard:
 
         playersMessage = ""
         for player in self.settings[server.id]['playerData']:
-          playersMessage += player['platformInfo']['platformUserHandle'] + "\n"
+          if 'platformInfo' in player and 'platformUserHandle' in player['platformInfo']:
+              playersMessage += player['platformInfo']['platformUserHandle'] + "\n"
+          else:
+              print('Something is wrong with the following player:')
+              print(str(player))          
 
         return await self.bot.say("Players currently on the Leaderboard:\n" + playersMessage)
 
