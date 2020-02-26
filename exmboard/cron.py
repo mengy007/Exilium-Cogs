@@ -22,9 +22,9 @@ async def fetch_stats(playername):
       startPosSearchString = "window.__INITIAL_STATE__="
       startPos = responseString.find(startPosSearchString) + len(startPosSearchString)
       endPos = responseString.find(";", startPos)
-      print('JSON: ' + responseString[startPos:endPos])
+      # print('JSON: ' + responseString[startPos:endPos])
       responseJson = json.loads(responseString[startPos:endPos])
-      return responseJson["stats-v2"]["standardProfiles"]["bfv|origin|" + playername.lower()]
+      return responseJson["stats-v2"]["standardProfiles"]["bfv|origin|type|" + playername.lower()]
 
 ## main
 async def main():
